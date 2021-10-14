@@ -8,7 +8,7 @@ class RegisterView(View):
 
     def get(self,request):
         context = {
-            "form" : self.form()
+            "form"  : self.form()
         }
         return  render(request,"accounts/register.html",context)
     
