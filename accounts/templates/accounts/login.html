@@ -1,5 +1,8 @@
+{% include base.html %}
+{% block content %}
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" style="width: 100px; height: 100px;">Login</button>
 </form>
+{% endblock content %}
