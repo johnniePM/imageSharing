@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'home',
+    'user'
 
 ]
 
@@ -124,6 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     Path.joinpath(BASE_DIR, "static")
 ]
+
 MEDIA_ROOT= BASE_DIR/'media'
 MEDIA_URL='/media/'
 
