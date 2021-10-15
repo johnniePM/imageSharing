@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from .forms import ImagesForm
 from .models import ImagesModel
 
-class NotesFormView(LoginRequiredMixin,FormView):
+class ImageCreateFormView(LoginRequiredMixin,FormView):
     form_class=ImagesForm
     success_url="/Images/"
     template_name="imageSetup/image_create.html"
