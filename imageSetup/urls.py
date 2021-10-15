@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import NotesFormView
+from .views import ImageCreateFormView
 
 
 
 app_name="Images"
 urlpatterns = [
-    path("create/",NotesFormView.as_view(),name="create"),
+    path("create/",ImageCreateFormView.as_view(),name="create"),
 ]
