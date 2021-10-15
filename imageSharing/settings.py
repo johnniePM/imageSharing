@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'home',
     'imageSetup',
-
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     Path.joinpath(BASE_DIR, "static")
 ]
+
 MEDIA_ROOT= BASE_DIR/'media'
 MEDIA_URL='/media/'
 
