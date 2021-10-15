@@ -7,4 +7,4 @@ class ImagesForm(forms.ModelForm):
     class Meta:
         model=ImagesModel
         exclude=('user',)
-        fields=["title", "description",'file','user']
+        fields=["title", "description",'file']
