@@ -1,8 +1,13 @@
-{% include base.html %}
+{% extends 'base.html' %}
 {% block content %}
+<div class="col-md-12">
 <form method="POST">
+  
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" style="width: 100px; height: 100px;">Login</button>
+    <button type="submit">Login</button>
+
+
 </form>
+</div>
 {% endblock content %}

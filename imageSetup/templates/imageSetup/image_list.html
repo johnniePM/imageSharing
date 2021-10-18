@@ -1,14 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
-{% for image in page_obj %}
-
-{{image.as_p}}
-
-{% endfor %}
-
-
-
-
+{% include '_gallery.html' %}
 {% endblock content %}
