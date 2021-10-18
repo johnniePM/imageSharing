@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import FormView,UpdateView,DeleteView
+from django.views.generic import FormView,UpdateView,DeleteView,DetailView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -41,10 +41,15 @@ class ImagesEditFormView(LoginRequiredMixin,UpdateView):
     model=ImagesModel
     fields=['title', 'description','file']
     template_name="imageSetup/image_edit.html"
-    success_url="/Images/"
+    success_url="/images/"
     
-class NotesDeleteView(LoginRequiredMixin,DeleteView):
+class ImageDeleteView(LoginRequiredMixin,DeleteView):
     model = ImagesModel
     success_url = "/Images/"
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+class ImagesDetailView(LoginRequiredMixin,DetailView):
+    model=ImagesModel
+    template_name="imageSetup/image_details.html"
+
