@@ -5,11 +5,14 @@
 
 }
 
+
 body {
-  background-color: #fff;
+  background-color: #dc3545;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
+  padding-top: 80px;
+
 }
 * {
   -webkit-box-sizing: border-box;
@@ -233,6 +236,7 @@ font-weight: 700;
 }
 
 /**** user testimonial ***/
+
 .items .card
 {
   margin:1rem;
@@ -244,3 +248,5 @@ font-weight: 700;
   width:100%;
   text-align: center;
 }
+
+

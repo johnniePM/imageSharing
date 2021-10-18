@@ -11,7 +11,7 @@ from .models import ImagesModel
 
 class ImageCreateFormView(LoginRequiredMixin,FormView):
     form_class=ImagesForm
-    success_url="/Images/"
+    success_url="/images/"
     template_name="imageSetup/image_create.html"
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
@@ -24,15 +24,16 @@ class ImageCreateFormView(LoginRequiredMixin,FormView):
             instance.user=request.user
             instance.save()
             pk=instance.id
+            # return redirect("images:list", pk=pk)
             return redirect("images:list", pk=pk)
 
 
 
 @login_required(login_url='accounts:login') #redirect when user is not logged in
-def notes_list_view(request):
+def images_list_view(request):
     queryset = ImagesModel.objects.filter(user=request.user)
     object_list=queryset.order_by('-updated_at')
-    paginator = Paginator(object_list, 4) # Show 4 pics per page.
+    paginator = Paginator(object_list, 9) # Show 9 pics per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
@@ -45,7 +46,7 @@ class ImagesEditFormView(LoginRequiredMixin,UpdateView):
     
 class ImageDeleteView(LoginRequiredMixin,DeleteView):
     model = ImagesModel
-    success_url = "/Images/"
+    success_url = "/images/"
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 

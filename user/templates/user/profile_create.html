@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<form method="POST">
+<form class="pt-3" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit">Register</button>
+    <button type="submit">create</button>
 </form>
 {% endblock content %}

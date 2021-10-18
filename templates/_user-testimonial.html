@@ -2,56 +2,19 @@
         <div class="section-header text-center p-5">
             <h2>Users</h2>
         </div>
+
         <div class="items ">
+            {% for user in user_list %}
+                <a href="/user/{{user.1}}">
                 <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
+                    <img src="/media/{{user.5}}" alt="image" class="card-img-top img-fluid" style="
+    height: 150px;">
                         <div class="card-body">
-                            <h4>user1</h4>
+                            <h4>{{user.1}}</h4>
                         </div>
-                        <div class="hover-text">Photographer1</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user2</h4>
-                        </div>
-                        <div class="hover-text">Photographer2</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user3</h4>
-                        </div>
-                        <div class="hover-text">Photographer3</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user4</h4>
-                        </div>
-                        <div class="hover-text">Photographer4</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user5</h4>
-                        </div>
-                        <div class="hover-text">Photographer5</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user6</h4>
-                        </div>
-                        <div class="hover-text">Photographer6</div>
-                </div>
-                <div class="card">
-                    <img src="https://source.unsplash.com/1600x900/?user  " alt="image" class="card-img-top">
-                        <div class="card-body">
-                            <h4>user6</h4>
-                        </div>
-                        <div class="hover-text">Photographer7</div>
-                </div>
+                        <div class="hover-text">{{user.2}} {{user.3}}</div>
+                </div></a>             
+            {% endfor %}              
             </div>
 </div>
 

@@ -1,23 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<h1>{{object.image.url}}</h1>
-<h1>{{usrProfile.username}}</h1>
-<h1>{{usrProfile.first_name}}</h1>
-<h1>{{usrProfile.last_name}}</h1>
-<h1>{{usrProfile.email}}</h1>
-<h1>{{usrProfile.id}}</h1>
-
-
-
-</div>
-
+<section class="">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col  col-md-12">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #dc3545; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <img src="{{object.image.url}}" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+              <button type="button" class="btn btn-outline-dark mt-5" data-mdb-ripple-color="dark" style="z-index: 1;">
+                <a href="/user/edit_profile/{{usrProfile.id}}/" >Edit profile</a>
+              </button>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5>{{usrProfile.username|title}}</h5>
+              <p>New York</p>
+            </div>
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div>
+                <p class="mb-1 h5">{{page_obj.paginator.count}}</p>
+                <p class="small text-muted mb-0">Photos</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1">About</p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1">Name -{{usrProfile.username |title}} {{usrProfile.last_name |title}}</p>
+                <p class="font-italic mb-1">Email Address - {{usrProfile.email}}</</p>
+                <p class="font-italic mb-0">Photographer</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0">Recent photos</p>
+              <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+            </div>
+            <div class="row g-2">
+                {% include '_gallery.html' %}
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content  %}

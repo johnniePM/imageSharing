@@ -1,21 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div style="height: 78px;"></div>
-
-{% for image in page_obj %}
-{% load static %}
-{{image.title}}
-{{image.description}}
-<img src="{{image.file.url}}" class="rounded mx-auto d-block w-100" alt="image">
-
-
-<div style="height: 78px;"></div>
-
-
-{% endfor %}
-
-
-
-
+{% include '_gallery.html' %}
 {% endblock content %}
