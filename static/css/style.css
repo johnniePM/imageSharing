@@ -7,11 +7,9 @@
 
 
 body {
-  background-color: #dc3545;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
-  padding-top: 80px;
 
 }
 * {
@@ -26,7 +24,7 @@ body {
 
 .top-header {
   -webkit-box-shadow: 0px 15px 44px 4px rgba(0, 0, 0, 0.79);
-  box-shadow: 0px 15px 44px 4px rgba(0, 0, 0, 0.79);
+  box-shadow: 0px 15px 44px 4px rba(59, 59, 59, 0.79);
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
 
