@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import FormView,UpdateView,DeleteView,DetailView
+from django.views.generic import FormView,UpdateView,DeleteView,DetailView,View
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -53,4 +54,16 @@ class ImageDeleteView(LoginRequiredMixin,DeleteView):
 class ImagesDetailView(LoginRequiredMixin,DetailView):
     model=ImagesModel
     template_name="imageSetup/image_details.html"
+
+@login_required(login_url='accounts:login') #redirect when user is not logged in
+def saved_images_list_view(request):
+    user = User.objects.filter(username=request.user)
+    queryset = ImagesModel.objects.filter(is_saved__in=user)
+    object_list=queryset.order_by('-updated_at')
+    paginator = Paginator(object_list, 9) # Show 9 pics per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
+
+
 

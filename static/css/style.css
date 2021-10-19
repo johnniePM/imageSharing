@@ -149,12 +149,13 @@ font-weight: 700;
   height:100%;
   object-fit: cover;
   object-position:50% 50%;
-  cursor:pointer;
   transition:.5s ease-in-out;
 }
 
 .gallery-item:hover .image img{
   transform:scale(1.5);
+  filter: blur(8px) ;
+  -webkit-filter: blur(8px);
 }
 
  .hover-text{
@@ -168,8 +169,7 @@ font-weight: 700;
   font-size:25px;
   pointer-events:none;
   z-index:4;
-  -webkit-backdrop-filter: blur(5px) saturate(1.8);
-  backdrop-filter: blur(5px) saturate(1.8);
+
 }
 
 .gallery-item:hover .hover-text{
