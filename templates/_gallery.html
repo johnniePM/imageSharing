@@ -1,0 +1,163 @@
+{% load static %}
+
+ <div class="container ">
+        <div class="section-header text-center p-5">
+            <h2>Gallery</h2>
+        </div>
+
+<div class="gallery">
+
+    <div class="gallery-container w-3 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.0.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+        <h3>Title - {{page_obj.0.title}}</h3>
+        <h5>Description - {{page_obj.0.description}}</h5>
+        <h6>Created date - {{page_obj.0.created_at}}</h6>
+      </div>
+      </div>
+    </div>
+
+    {% if page_obj|length > 1%}
+    <div class="gallery-container w-3 h-3">
+      <div class="gallery-item">
+        <div class="image">
+           <img src="{{page_obj.1.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.1.title}}</h3>
+        <h5>Description - {{page_obj.1.description}}</h5>
+        <h6>Created date - {{page_obj.1.created_at}}</h6>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 2%}
+    <div class="gallery-container  h-2">
+      <div class="gallery-item">
+        <div class="image">
+           <img src="{{page_obj.2.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.2.title}}</h3>
+        <h5>Description - {{page_obj.2.description}}</h5>
+        <h6>Created date - {{page_obj.2.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 3%}
+    <div class="gallery-container w-2 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.3.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+         <h3>Title - {{page_obj.3.title}}</h3>
+        <h5>Description - {{page_obj.3.description}}</h5>
+        <h6>Created date - {{page_obj.3.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 4%}
+    <div class="gallery-container w-4 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.4.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.4.title}}</h3>
+        <h5>Description - {{page_obj.4.description}}</h5>
+        <h6>Created date - {{page_obj.4.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 5%}
+    <div class="gallery-container w-3">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.5.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.5.title}}</h3>
+        <h5>Description - {{page_obj.5.description}}</h5>
+        <h6>Created date - {{page_obj.5.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 6%}
+     <div class="gallery-container w-2 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.6.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.6.title}}</h3>
+        <h5>Description - {{page_obj.6.description}}</h5>
+        <h6>Created date - {{page_obj.6.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 7%}
+
+  <div class="gallery-container w-2 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.7.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.7.title}}</h3>
+        <h5>Description - {{page_obj.7.description}}</h5>
+        <h6>Created date - {{page_obj.7.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    {% if page_obj|length > 8%}
+    <div class="gallery-container w-4 h-2">
+      <div class="gallery-item">
+        <div class="image">
+          <img src="{{page_obj.8.file.url}}" alt="nature">
+        </div>
+        <div class="hover-text">
+          <h3>Title - {{page_obj.8.title}}</h3>
+        <h5>Description - {{page_obj.8.description}}</h5>
+        <h6>Created date - {{page_obj.8.created_at}}</h6></div>
+      </div>
+    </div>
+    {% endif %}
+    
+</div>
+
+
+<div class="d-flex justify-content-center aligns-items-center">
+<nav aria-label="Pagination" class="pt-5">
+  <ul class="pagination">
+    <li class="page-item">
+      {% if page_obj.number == 1 %}
+        {% else %}
+    <li class="page-item"><a class="page-link active sr-only" href="?page={{ page_obj.number|add:-1 }}">Previous</a></li>
+        {% endif %}
+          {% for i in page_obj.paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="page-item active" aria-current="page">               
+                  <span class="page-link">({{ i }})<span class="sr-only"></span></span>                       
+                </li>
+              {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}           
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ i }}{{ query_string }}">{{ i }}</a>
+                </li>
+
+              {% endif %}
+          {% endfor %}
+      {% if page_obj.number == page_obj.paginator.num_pages %}
+      {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:1 }}">Next</a></li>
+  {% endif %}
+  </ul>
+  </nav>
+</div>
+
+</div>
+
+
