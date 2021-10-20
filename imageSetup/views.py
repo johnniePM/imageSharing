@@ -1,9 +1,11 @@
+from typing import List
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView,UpdateView,DeleteView,DetailView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.views.generic.list import ListView
 
 
 from .forms import ImagesForm
@@ -53,4 +55,11 @@ class ImageDeleteView(LoginRequiredMixin,DeleteView):
 class ImagesDetailView(LoginRequiredMixin,DetailView):
     model=ImagesModel
     template_name="imageSetup/image_details.html"
+
+
+class ImageMorePicsView(ListView):
+    model=ImagesModel
+    template_name="imageSetup/image_more_view.html"
+    paginate_by=3
+    context_object_name = "images"
 

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h1>Image List</h1>
+  {% if object_list %}
+  <ul>
+    {% for img in object_list %}
+    <div class="gallery-container w-3 h-2">
+        <div class="gallery-item">
+          <div class="image">
+            {{img.url}}
+            <img src="{{img.url}}" alt="nature">
+          </div>
+          <div class="hover-text">
+          <h3>Title - {{img.title}}</h3>
+          <h5>Description - {{img.description}}</h5>
+          <h6>Created date - {{img.created_at}}</h6>
+        </div>
+        </div>
+      </div>
+  
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+
+
+    
+form
+<div class="loading" style="display:none;">
+Loading.......
+</div>
+
+
+{% endblock  %}
+<script>
+    var infinite = new Waypoint.infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function (){
+            $('.loading').show
+        }
+    }); 
+
+</script>
