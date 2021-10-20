@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import User
+=======
+from typing import List
+>>>>>>> 7902cc9f2c668dbaef3b1a10bdad335689baa4cb
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView,UpdateView,DeleteView,DetailView,View
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+<<<<<<< HEAD
 from django.urls import reverse
+=======
+from django.views.generic.list import ListView
+>>>>>>> 7902cc9f2c668dbaef3b1a10bdad335689baa4cb
 
 
 from .forms import ImagesForm
@@ -56,6 +64,7 @@ class ImagesDetailView(LoginRequiredMixin,DetailView):
     model=ImagesModel
     template_name="imageSetup/image_details.html"
 
+<<<<<<< HEAD
 @login_required(login_url='accounts:login') #redirect when user is not logged in
 def saved_images_list_view(request):
     user = User.objects.filter(username=request.user)
@@ -85,4 +94,12 @@ class UnsaveImageView(View):
             tweetobj.is_saved.remove(user)
             tweetobj.save()
         return redirect(reverse('images:list'))
+=======
+
+class ImageMorePicsView(ListView):
+    model=ImagesModel
+    template_name="imageSetup/image_more_view.html"
+    paginate_by=3
+    context_object_name = "images"
+>>>>>>> 7902cc9f2c668dbaef3b1a10bdad335689baa4cb
 
