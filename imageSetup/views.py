@@ -5,6 +5,7 @@ from django.views.generic import FormView,UpdateView,DeleteView,DetailView,View
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.urls import reverse
 
 
 from .forms import ImagesForm
@@ -66,4 +67,22 @@ def saved_images_list_view(request):
     return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
 
 
+class SaveImageView(View):
+    def get(self, request, *args, **kwargs):
+        if 'pk' in self.kwargs:
+            user = request.user
+            imgobj = ImagesModel.objects.get(id=self.kwargs['pk'])
+            imgobj.is_saved.add(user)
+            imgobj.save()
+        return redirect(reverse('images:list'))
+
+
+class UnsaveImageView(View):
+    def get(self, request, *args, **kwargs):
+        if 'pk' in self.kwargs:
+            user = request.user
+            tweetobj = ImagesModel.objects.get(id=self.kwargs['pk'])
+            tweetobj.is_saved.remove(user)
+            tweetobj.save()
+        return redirect(reverse('images:list'))
 
