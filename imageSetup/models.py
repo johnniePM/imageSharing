@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
+from django.conf import settings
+
 
 import os
 from django.core.exceptions import ObjectDoesNotExist
@@ -20,6 +22,7 @@ class ImagesModel(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True,)
     file=models.FileField(upload_to=get_file_path, blank=False, null=False)
+    is_saved=models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='saved_images')
     def __str__(self) -> str:
         return f"{self.title} | {self.created_at.year}/{self.created_at.month}/{self.created_at.day} on {self.created_at.hour}:{self.created_at.minute}"
 

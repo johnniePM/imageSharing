@@ -9,8 +9,8 @@
     <p>uploaded at {{object.created_at}} by {{object.user}} </p>
     <p>Last edited at {{object.updated_at}} by {{object.user}} </p>
 
-    <a href="{% url 'Images:edit_image' object.id %}" class="btn btn-secondary m-4">Edit Post</a>
-    <a href="{% url 'Images:image_delete' object.id %}" class="btn btn-danger m-4">DELETE</a>
+    <a href="{% url 'images:edit_image' object.id %}" class="btn btn-secondary m-4">Edit Post</a>
+    <a href="{% url 'images:image_delete' object.id %}" class="btn btn-danger m-4">DELETE</a>
 </div>
 
 {% endblock content %}
