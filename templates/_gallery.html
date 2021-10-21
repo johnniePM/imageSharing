@@ -20,7 +20,7 @@
           <h3>Title - {{page_obj.0.title}}</h3>
           <h5>Description - {{page_obj.0.description}}</h5>
           <h6>Created date - {{page_obj.0.created_at}}</h6>
-          {% if request.user in page_obj.0.is_saved.all%}
+          {% if page_obj.0.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.0.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -47,7 +47,7 @@
           <h3>Title - {{page_obj.1.title}}</h3>
           <h5>Description - {{page_obj.1.description}}</h5>
           <h6>Created date - {{page_obj.1.created_at}}</h6>
-          {% if request.user in page_obj.1.is_saved.all%}
+          {% if page_obj.1.user.username == user.username %}
           <a href="{% url 'images:details' page_obj.1.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -77,7 +77,7 @@
           <h3>Title - {{page_obj.2.title}}</h3>
           <h5>Description - {{page_obj.2.description}}</h5>
           <h6>Created date - {{page_obj.2.created_at}}</h6>
-          {% if request.user in page_obj.2.is_saved.all%}
+          {% if page_obj.2.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.2.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -107,7 +107,7 @@
           <h3>Title - {{page_obj.3.title}}</h3>
           <h5>Description - {{page_obj.3.description}}</h5>
           <h6>Created date - {{page_obj.3.created_at}}</h6>
-          {% if request.user in page_obj.3.is_saved.all%}
+          {% if page_obj.3.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.3.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -136,7 +136,7 @@
           <h3>Title - {{page_obj.4.title}}</h3>
           <h5>Description - {{page_obj.4.description}}</h5>
           <h6>Created date - {{page_obj.4.created_at}}</h6>
-          {% if request.user in page_obj.4.is_saved.all%}
+          {% if page_obj.4.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.4.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -165,7 +165,7 @@
           <h3>Title - {{page_obj.5.title}}</h3>
           <h5>Description - {{page_obj.5.description}}</h5>
           <h6>Created date - {{page_obj.5.created_at}}</h6>
-          {% if request.user in page_obj.5.is_saved.all%}
+          {% if page_obj.5.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.5.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -194,7 +194,7 @@
           <h3>Title - {{page_obj.6.title}}</h3>
           <h5>Description - {{page_obj.6.description}}</h5>
           <h6>Created date - {{page_obj.6.created_at}}</h6>
-          {% if request.user in page_obj.6.is_saved.all%}
+          {% if page_obj.6.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.6.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -223,7 +223,7 @@
           <h3>Title - {{page_obj.7.title}}</h3>
           <h5>Description - {{page_obj.7.description}}</h5>
           <h6>Created date - {{page_obj.7.created_at}}</h6>
-          {% if request.user in page_obj.7.is_saved.all%}
+          {% if page_obj.7.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.7.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -250,7 +250,7 @@
           <h3>Title - {{page_obj.8.title}}</h3>
           <h5>Description - {{page_obj.8.description}}</h5>
           <h6>Created date - {{page_obj.8.created_at}}</h6>
-          {% if request.user in page_obj.8.is_saved.all%}
+          {% if page_obj.8.user.username == user.username%}
           <a href="{% url 'images:details' page_obj.8.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
           {% endif %}
@@ -300,9 +300,9 @@
     </nav>
   </div>
 
-<!--  View More Button -->
-<div class="d-flex justify-content-center align-items-center">
-  <button class="btn btn-outline-primary">View More</button>
-</div  >
+  <!--  View More Button -->
+  <div class="d-flex justify-content-center align-items-center">
+    <button class="btn btn-outline-primary">View More</button>
+  </div>
 </div>
 {% endif %}

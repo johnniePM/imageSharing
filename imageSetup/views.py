@@ -76,8 +76,7 @@ class SaveImageView(View):
             imgobj = ImagesModel.objects.get(id=self.kwargs['pk'])
             imgobj.is_saved.add(user)
             imgobj.save()
-        return redirect(reverse('images:list'))
-
+        return redirect(request.META.get('HTTP_REFERER'))
 
 class UnsaveImageView(View):
     def get(self, request, *args, **kwargs):
@@ -86,8 +85,7 @@ class UnsaveImageView(View):
             tweetobj = ImagesModel.objects.get(id=self.kwargs['pk'])
             tweetobj.is_saved.remove(user)
             tweetobj.save()
-        return redirect(reverse('images:list'))
-
+            return redirect(request.META.get('HTTP_REFERER'))
 class ImageMorePicsView(ListView):
     model=ImagesModel
     template_name="imageSetup/image_more_view.html"
