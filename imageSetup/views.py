@@ -104,6 +104,6 @@ class SearchResultsView(ListView):
     def get_queryset(self): # new
         query = self.request.GET.get('q')
         object_list = ImagesModel.objects.filter(
-            Q(name__icontains=query) | Q(state__icontains=query)
+            Q(title__icontains=query) | Q(description__icontains=query)
         )
         return object_list
