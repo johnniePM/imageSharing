@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views.generic.list import ListView
-
+from django.db.models import Q
 
 from .forms import ImagesForm
 from .models import ImagesModel
@@ -94,3 +94,16 @@ class ImageMorePicsView(ListView):
     paginate_by=3
     context_object_name = "images"
 
+
+
+class SearchResultsView(ListView):
+    model = ImagesModel
+    template_name = 'image_search.html'
+
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = ImagesModel.objects.filter(
+            Q(name__icontains=query) | Q(state__icontains=query)
+        )
+        return object_list
