@@ -130,38 +130,5 @@
 </div>
 
 
-<div class="d-flex justify-content-center aligns-items-center">
-<nav aria-label="Pagination" class="pt-5">
-  <ul class="pagination">
-    <li class="page-item">
-      {% if page_obj.number == 1 %}
-        {% else %}
-    <li class="page-item"><a class="page-link active sr-only" href="?page={{ page_obj.number|add:-1 }}">Previous</a></li>
-        {% endif %}
-          {% for i in page_obj.paginator.page_range %}
-              {% if page_obj.number == i %}
-                <li class="page-item active" aria-current="page">               
-                  <span class="page-link">({{ i }})<span class="sr-only"></span></span>                       
-                </li>
-              {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}           
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ i }}{{ query_string }}">{{ i }}</a>
-                </li>
-
-              {% endif %}
-          {% endfor %}
-      {% if page_obj.number == page_obj.paginator.num_pages %}
-      {% else %}
-    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:1 }}">Next</a></li>
-  {% endif %}
-  </ul>
-  </nav>
 </div>
-
-<!--  View More Button -->
-<div class="d-flex justify-content-center align-items-center">
-  <button class="btn btn-outline-primary">View More</button>
-</div  >
-</div>
-
 
