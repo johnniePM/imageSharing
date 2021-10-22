@@ -91,4 +91,4 @@ class ImageMorePicsView(ListView):
     template_name="imageSetup/image_more_view.html"
     paginate_by=3
     context_object_name = "images"
-
+    ordering = ['-created_at']
