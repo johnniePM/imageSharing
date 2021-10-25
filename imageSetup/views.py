@@ -99,13 +99,15 @@ class ImageMorePicsView(ListView):
 
 class SearchResultsView(ListView):
     
-    model = ImagesModel or User
     template_name = 'image_search.html'
+
+
 
     def get_queryset(self): # new
         filter_field = self.request.GET.get('filter')
+        query = self.request.GET.get('q')
+
         if filter_field == 'image':
-            query = self.request.GET.get('q')
             object_list = ImagesModel.objects.filter(
                 Q(title__icontains=query) | Q(description__icontains=query)
             )
@@ -116,3 +118,22 @@ class SearchResultsView(ListView):
                 Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
             )
             return object_list
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('q')
+        context = super(SearchResultsView, self).get_context_data(**kwargs)
+        if self.request.GET.get('filter')=='image':
+            context['image'] = ImagesModel.objects.filter(
+                    Q(title__icontains=query) | Q(description__icontains=query)
+                )
+        if self.request.GET.get('filter')=='user':
+            context['profile'] = Profile.objects.filter(
+                    Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+                )
+        if self.request.GET.get('filter')=='all':
+            context['profile'] = Profile.objects.filter(
+                    Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+                )
+            context['image'] = ImagesModel.objects.filter(
+                    Q(title__icontains=query) | Q(description__icontains=query)
+                )
+        return context

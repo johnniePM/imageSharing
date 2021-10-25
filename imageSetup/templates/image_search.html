@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if request.GET.get.filter is image %}
 <div style="height: 80px;"></div>
-{% for item in object_list %}
+{% for item in profile %}
+<img src="{{item.image.url}}" alt="image">
+hello
+{{item.user.username}}
+{{item.user.first_name}}
+{% endfor %}
+
+
+
+{% for item in image %}
 <img src="{{item.file.url}}" alt=" image">
 {{item.title}}
 {{item.description}}
@@ -13,14 +21,7 @@
 <div></div>
 {% endfor %}
 
-{% elif request.GET.get.filter == user %}
 
-{% for item in object_list %}
-<img src="{{item.image.url}}" alt="image">
 
-{{item.user.username}}
-{{item.user.first_name}}
 
-{% endfor %}
-{% endif %}
 {% endblock content %}
