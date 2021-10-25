@@ -1,0 +1,22 @@
+ <div class="container-fluid mb-5 pb-2">
+        <div class="section-header text-center p-5">
+            <h2>Users</h2>
+        </div>
+
+        <div class="items ">
+            {% for user in user_list %}
+                <a href="/user/{{user.1}}">
+                <div class="card">
+                    <img src="/media/{{user.5}}" alt="image" class="card-img-top img-fluid" style="
+    height: 150px;">
+                        <div class="card-body">
+                            <h4>{{user.1}}</h4>
+                        </div>
+                        <div class="hover-text">{{user.2}} {{user.3}}</div>
+                </div></a>             
+            {% endfor %}              
+            </div>
+</div>
+
+
+   

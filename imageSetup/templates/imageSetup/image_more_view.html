@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h1 class="m-5 text-center">Images</h1>
+  {% if object_list %}
+  <div class="infinite-container  container-fluid row">
+
+          {% for img in object_list %}
+          <div class="row infinite-item  col-md-4">
+            <div class="moreimage_item gallery-item">
+                <div class="image">
+            <!-- <img src="{{img.file.url}}" alt="nature"> -->
+                 <img src="{{img.file.url}}" alt="nature" width="491px" height="313px">
+                </div>
+            <div class="hover-text">
+             <h3>Title - {{img.title}}</h3>
+              <h5>Description - {{img.description}}</h5>
+               <h6>Created date - {{img.created_at}}</h6>
+            </div>
+          </div>
+  </div>
+   
+    {% endfor %}  
+
+  </div>
+  {% else %}
+    <p>There are no images in the library.</p>
+  {% endif %}
+  {% if page_obj.number < page_obj.paginator.num_pages %}
+    <a class="infinite-more-link" href="?page={{ page_obj.number|add:1 }}"> More</a>
+{% endif %}    
+
+<div class="loading" style="display:none;">
+<h1> Loading.......</h1>
+</div>
+
+<script src="http://127.0.0.1:4000/static/js/jquery.waypoints.min.js"></script>
+<script src="http://127.0.0.1:4000/static/js/infinite.min.js"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        offset: 'bottom-in-view',
+        onBeforePageLoad: function (){
+            $('.loading').show();
+        },
+        onAfterPageLoad: function () {
+        $('.loading').hide();
+      }
+    }); 
+
+</script>
+
+{% endblock  %}

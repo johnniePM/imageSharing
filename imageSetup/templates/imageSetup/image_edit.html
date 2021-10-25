@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>
+        {% load static %}
+        <img src="{{object.file.url}}" class="rounded mx-auto d-block w-100" alt="image">
+    </div>
+    <p>
+        <label for="id_title">Title:</label> <input type="text" class="border-0" name="title" value="{{object.title}}"
+            maxlength="100" required="" id="id_title">
+    </p>
+    <p>
+        <div>Discription:</div>
+        <label for="id_description"></label> <textarea name="description" class=" border-0 txta w-100" required=""
+            id=" id_description">{{object.description}}</textarea>
+    </p>
+
+    <p>
+        <div class="row">
+            <div class="col">
+                <label for="id_file">File:</label> Currently:
+
+
+                <a href="{{ object.file.url}}">{{ object.file.url}}</a>
+            </div>
+
+        </div>
+        <div class="mb-3">
+            <label for="id_file" class="form-label">Change the photo: <small
+                    class="text-secondary">*optional</small></label>
+            <input type="file" class="form-control" name="file" accept="image/*" id="id_file">
+
+        </div>
+    </p>
+
+    <div class="d-grid gap-2 mx-auto">
+        <button type="submit" class="btn btn-primary mb-3 align-self-center col-6 m-auto">Save Changes</button>
+    </div>
+    <a class="d-grid mx-auto btn btn-success mb-3 align-self-center col-6"
+        href="{% url 'images:details' object.id %}">Go
+        back</a>
+</form>
+<div style="height: 78px;"></div>
+
+{% endblock content %}
