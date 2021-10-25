@@ -67,7 +67,7 @@ def saved_images_list_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
-
+ 
 
 class SaveImageView(View):
     def get(self, request, *args, **kwargs):

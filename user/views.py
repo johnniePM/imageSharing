@@ -33,14 +33,12 @@ def profile_view(request,userName:str):
 
     
 
-
-
-
 class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     model=Profile
     fields=['user','image']
-    template_name="user/profile_edit.html"
-    success_url="/images/"
+    template_name="user/profile_edit.html" 
+    success_url="/images/"   
+
 
         
 
