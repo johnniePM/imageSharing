@@ -52,6 +52,11 @@
         <form class="d-flex" method="get" action="{% url 'images:image_search' %}">
           <input class="form-control me-2" type="search" placeholder="Search users and images" aria-label="Search"
             name="q">
+          <select name="filter" class="form-control">
+            <option value="all">All</option>
+            <option value="user">user</option>
+            <option value="image">image</option>
+          </select>
           <button class="btn btn-outline-danger" type="submit">Search</button>
         </form>
 

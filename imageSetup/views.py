@@ -12,6 +12,7 @@ from django.db.models import Q
 
 from .forms import ImagesForm
 from .models import ImagesModel
+from user.models import Profile
 
 class ImageCreateFormView(LoginRequiredMixin,FormView):
     form_class=ImagesForm
@@ -97,13 +98,21 @@ class ImageMorePicsView(ListView):
 
 
 class SearchResultsView(ListView):
-    model = ImagesModel
+    
+    model = ImagesModel or User
     template_name = 'image_search.html'
 
-
     def get_queryset(self): # new
-        query = self.request.GET.get('q')
-        object_list = ImagesModel.objects.filter(
-            Q(title__icontains=query) | Q(description__icontains=query)
-        )
-        return object_list
+        filter_field = self.request.GET.get('filter')
+        if filter_field == 'image':
+            query = self.request.GET.get('q')
+            object_list = ImagesModel.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query)
+            )
+            return object_list
+        if filter_field == 'user':
+            query = self.request.GET.get('q')
+            object_list = Profile.objects.filter(
+                Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+            )
+            return object_list
