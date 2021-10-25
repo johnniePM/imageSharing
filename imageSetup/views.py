@@ -68,7 +68,7 @@ def saved_images_list_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
-
+ 
 
 class SaveImageView(View):
     def get(self, request, *args, **kwargs):
@@ -77,8 +77,7 @@ class SaveImageView(View):
             imgobj = ImagesModel.objects.get(id=self.kwargs['pk'])
             imgobj.is_saved.add(user)
             imgobj.save()
-        return redirect(reverse('images:list'))
-
+        return redirect(request.META.get('HTTP_REFERER'))
 
 class UnsaveImageView(View):
     def get(self, request, *args, **kwargs):
@@ -87,13 +86,13 @@ class UnsaveImageView(View):
             tweetobj = ImagesModel.objects.get(id=self.kwargs['pk'])
             tweetobj.is_saved.remove(user)
             tweetobj.save()
-        return redirect(reverse('images:list'))
-
+            return redirect(request.META.get('HTTP_REFERER'))
 class ImageMorePicsView(ListView):
     model=ImagesModel
     template_name="imageSetup/image_more_view.html"
     paginate_by=3
     context_object_name = "images"
+    ordering = ['-created_at']
 
 
 
