@@ -8,10 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views.generic.list import ListView
-
+from django.db.models import Q
 
 from .forms import ImagesForm
 from .models import ImagesModel
+from user.models import Profile
 
 class ImageCreateFormView(LoginRequiredMixin,FormView):
     form_class=ImagesForm
@@ -92,3 +93,46 @@ class ImageMorePicsView(ListView):
     paginate_by=3
     context_object_name = "images"
     ordering = ['-created_at']
+
+
+
+class SearchResultsView(ListView):
+    
+    template_name = 'image_search.html'
+
+
+
+    def get_queryset(self): # new
+        filter_field = self.request.GET.get('filter')
+        query = self.request.GET.get('q')
+
+        if filter_field == 'image':
+            object_list = ImagesModel.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query)
+            )
+            return object_list
+        if filter_field == 'user':
+            query = self.request.GET.get('q')
+            object_list = Profile.objects.filter(
+                Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+            )
+            return object_list
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('q')
+        context = super(SearchResultsView, self).get_context_data(**kwargs)
+        if self.request.GET.get('filter')=='image':
+            context['image'] = ImagesModel.objects.filter(
+                    Q(title__icontains=query) | Q(description__icontains=query)
+                )
+        if self.request.GET.get('filter')=='user':
+            context['profile'] = Profile.objects.filter(
+                    Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+                )
+        if self.request.GET.get('filter')=='all':
+            context['profile'] = Profile.objects.filter(
+                    Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
+                )
+            context['image'] = ImagesModel.objects.filter(
+                    Q(title__icontains=query) | Q(description__icontains=query)
+                )
+        return context
