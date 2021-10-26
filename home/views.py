@@ -3,7 +3,10 @@ from imageSetup.models import ImagesModel
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.db import connection
+from django.contrib.auth.decorators import login_required
 
+
+# @login_required(login_url='accounts:login') #redirect when user is not logged in
 def index_view(request):
     queryset = ImagesModel.objects.filter()
     object_list=queryset.order_by('-updated_at')

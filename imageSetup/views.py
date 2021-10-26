@@ -37,7 +37,7 @@ class ImageCreateFormView(LoginRequiredMixin,FormView):
 @login_required(login_url='accounts:login') #redirect when user is not logged in
 def images_list_view(request):
     queryset = ImagesModel.objects.filter(user=request.user)
-    object_list=queryset.order_by('-updated_at')
+    object_list=queryset.order_by('-created_at')
     paginator = Paginator(object_list, 9) # Show 9 pics per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

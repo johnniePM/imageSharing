@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from imageSetup.models import ImagesModel
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.urls import reverse
 
 def profile_view(request,userName:str):
 
@@ -37,12 +38,7 @@ class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     model=Profile
     fields=['user','image']
     template_name="user/profile_edit.html" 
-    success_url="/images/"   
+    def get_success_url(self):
+        return reverse('user:profile', args=(self.object.user.username,))
 
 
-        
-
-
-
-
-    
