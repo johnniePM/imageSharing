@@ -28,9 +28,9 @@ class ImageCreateFormView(LoginRequiredMixin,FormView):
             instance = ImagesModel(file=request.FILES['file'], title=request.POST['title'],description=request.POST['description'])
             instance.user=request.user
             instance.save()
-            pk=instance.id
+            pk=instance.user.id
             # return redirect("images:list", pk=pk)
-            return redirect("images:list", pk=pk)
+            return redirect("images:list")
 
 
 
