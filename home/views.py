@@ -14,7 +14,7 @@ def index_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     cursor=connection.cursor()
-    cursor.execute("select auth_user.id,  auth_user.username,auth_user.first_name, auth_user.last_name, auth_user.email, user_profile.image from auth_user LEFT JOIN user_profile ON auth_user.id=user_profile.user_id ;" )
+    cursor.execute("select auth_user.id,  auth_user.username,auth_user.first_name, auth_user.last_name, auth_user.email, user_profile.image ,user_profile.country from auth_user LEFT JOIN user_profile ON auth_user.id=user_profile.user_id ;" )
     user_list=cursor.fetchall()
     
 

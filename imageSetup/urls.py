@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ImageCreateFormView, ImageListView,images_list_view,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView
+from .views import ImageCreateFormView, ImageListView,images_list_view,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView,images_list_view_user
 
 
 
@@ -7,6 +7,7 @@ app_name="images"
 urlpatterns = [
     path("create/",ImageCreateFormView.as_view(),name="create"),
     path("",ImageListView.as_view(),name="list"),
+    path("viewmore/<int:pk>/",images_list_view_user,name="list_viewmore_user"),
     path('edit_image/<int:pk>/',ImagesEditFormView.as_view(), name='edit_image'),
     path("<int:pk>/", ImagesDetailView.as_view(),name="details"),
     path('<int:pk>/imageDelete/', ImageDeleteView.as_view(), name='image_delete'),
