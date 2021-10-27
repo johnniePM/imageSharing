@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ImageCreateFormView, ImageListView,images_list_view,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView,images_list_view_user
+from .views import ImageCreateFormView, ImageListView,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView,images_list_view_user
 
 
 
