@@ -36,7 +36,7 @@ def profile_view(request,userName:str):
 
 class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     model=Profile
-    fields=['user','image']
+    fields=['image']
     template_name="user/profile_edit.html" 
     def get_success_url(self):
         return reverse('user:profile', args=(self.object.user.username,))

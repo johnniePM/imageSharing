@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import ImageCreateFormView,images_list_view,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView
+from .views import ImageCreateFormView,images_list_view,ImagesEditFormView,ImageDeleteView,ImagesDetailView,saved_images_list_view,images_list_view_user,SaveImageView,UnsaveImageView,ImageMorePicsView,SearchResultsView
 
 
 
 app_name="images"
 urlpatterns = [
     path("create/",ImageCreateFormView.as_view(),name="create"),
+    path("viewmore/<int:pk>/",images_list_view_user,name="list_viewmore_user"),
     path("",images_list_view,name="list"),
     path('edit_image/<int:pk>/',ImagesEditFormView.as_view(), name='edit_image'),
     path("<int:pk>/", ImagesDetailView.as_view(),name="details"),

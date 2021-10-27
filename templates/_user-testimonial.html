@@ -3,16 +3,16 @@
             <h2>Users</h2>
         </div>
 
-        <div class="items ">
+        <div class="items text-capitalize text-center">
             {% for user in user_list %}
-                <a href="/user/{{user.1}}">
-                <div class="card">
-                    <img src="/media/{{user.5}}" alt="image" class="card-img-top img-fluid" style="
-    height: 150px;">
+                <a href="/user/{{user.1}}" class="text-decoration-none">
+                <div class="card text-dark justify-content-center align-items-center ">
+                    <img src="/media/{{user.5}}" alt="image" class="card-img-top img-fluid rounded-circle  m-2" style="
+    height: 150px; width:150px;">
                         <div class="card-body">
-                            <h4>{{user.1}}</h4>
+                            <h5 class="text-primary">{{user.1}}</h5>
                         </div>
-                        <div class="hover-text">{{user.2}} {{user.3}}</div>
+                        <div class="hover-text text-dark">{{user.2}} {{user.3}} </br> {{user.6}}</div>
                 </div></a>             
             {% endfor %}              
             </div>

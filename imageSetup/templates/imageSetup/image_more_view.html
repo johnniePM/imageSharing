@@ -6,18 +6,31 @@
   {% if object_list %}
   <div class="infinite-container  container-fluid row">
 
-          {% for img in object_list %}
+          {% for list in object_list %}
           <div class="row infinite-item  col-md-4">
             <div class="moreimage_item gallery-item">
                 <div class="image">
             <!-- <img src="{{img.file.url}}" alt="nature"> -->
-                 <img src="{{img.file.url}}" alt="nature" width="491px" height="313px">
+                 <img src="{{list.file.url}}" alt="nature" width="491px" height="313px">
                 </div>
-            <div class="hover-text">
-             <h3>Title - {{img.title}}</h3>
-              <h5>Description - {{img.description}}</h5>
-               <h6>Created date - {{img.created_at}}</h6>
-            </div>
+                <div class="hover-text">
+                  <h3>Title - {{list.title}}</h3>
+                  <h5>Description - {{list.description}}</h5>
+                  <h6>Created date - {{list.created_at}}</h6>
+                  <a href="{% url 'images:details' list.id %}" style="pointer-events:initial !important;"
+                    class="btn btn-success">Details</a>´
+                  {% if request.user.is_authenticated %}
+                  {% if request.user in list.is_saved.all%}
+                  <a href="{% url 'images:image_unsave' list.id %}" class="btn btn-warning"
+                    style="pointer-events:initial !important;">unsave
+                    {{list.is_saved.all.count}}</a>
+                  {% else %}
+                  <a href="{% url 'images:image_save' list.id %}" class="btn btn-warning"
+                    style="pointer-events:initial !important;">save
+                    {{list.is_saved.all.count}}</a>
+                  {% endif %}
+                  {% endif %}
+                </div>
           </div>
   </div>
    
@@ -35,8 +48,7 @@
 <h1> Loading.......</h1>
 </div>
 
-<script src="http://127.0.0.1:4000/static/js/jquery.waypoints.min.js"></script>
-<script src="http://127.0.0.1:4000/static/js/infinite.min.js"></script>
+
 <script>
     var infinite = new Waypoint.Infinite({
         element: $('.infinite-container')[0],

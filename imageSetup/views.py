@@ -35,6 +35,16 @@ class ImageCreateFormView(LoginRequiredMixin,FormView):
 
 
 @login_required(login_url='accounts:login') #redirect when user is not logged in
+def images_list_view_user(request,pk:int):
+    resuertUser=User.objects.get(id=pk)
+    queryset = ImagesModel.objects.filter(user=resuertUser)
+    object_list=queryset.order_by('-created_at')
+    paginator = Paginator(object_list, 9) # Show 9 pics per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
+
+@login_required(login_url='accounts:login') #redirect when user is not logged in
 def images_list_view(request):
     queryset = ImagesModel.objects.filter(user=request.user)
     object_list=queryset.order_by('-created_at')
@@ -87,10 +97,10 @@ class UnsaveImageView(View):
             tweetobj.is_saved.remove(user)
             tweetobj.save()
             return redirect(request.META.get('HTTP_REFERER'))
+            
 class ImageMorePicsView(ListView):
     model=ImagesModel
     template_name="imageSetup/image_more_view.html"
-    paginate_by=3
     context_object_name = "images"
     ordering = ['-created_at']
 
