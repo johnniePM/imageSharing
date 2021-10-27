@@ -14,6 +14,15 @@ from .forms import ImagesForm
 from .models import ImagesModel
 from user.models import Profile
 
+class UserFilterViewMixin:
+    user_field = 'user'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            **{self.user_field: self.request.user}
+    )
+
+
 class ImageCreateFormView(LoginRequiredMixin,FormView):
     form_class=ImagesForm
     success_url="/images/"
@@ -43,11 +52,23 @@ def images_list_view(request):
     page_obj = paginator.get_page(page_number)
     return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
 
-class ImagesEditFormView(LoginRequiredMixin,UpdateView):
+
+class ImageListView(LoginRequiredMixin, ListView):
+    model=ImagesModel
+    template_name="imageSetup/image_list.html"
+    paginate_by=9
+    ordering = ['-created_at']
+    def get_queryset(self):
+        user= self.request.user
+        page_obj=ImagesModel.objects.filter(user=user)
+        return page_obj
+
+class ImagesEditFormView(LoginRequiredMixin,UserFilterViewMixin,UpdateView):
     model=ImagesModel
     fields=['title', 'description','file']
     template_name="imageSetup/image_edit.html"
     success_url="/images/"
+
     
 class ImageDeleteView(LoginRequiredMixin,DeleteView):
     model = ImagesModel
@@ -87,10 +108,10 @@ class UnsaveImageView(View):
             tweetobj.is_saved.remove(user)
             tweetobj.save()
             return redirect(request.META.get('HTTP_REFERER'))
-class ImageMorePicsView(ListView):
+class ImageMorePicsView(LoginRequiredMixin, ListView):
     model=ImagesModel
     template_name="imageSetup/image_more_view.html"
-    paginate_by=3
+    paginate_by=9
     context_object_name = "images"
     ordering = ['-created_at']
 
