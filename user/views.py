@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.urls import reverse
 
+@login_required(login_url='accounts:login') #redirect when user is not logged in
 def profile_view(request,userName:str):
 
     try:

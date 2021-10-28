@@ -63,55 +63,20 @@ body {
 
 
 /***** carousel *****/
-.index-carousel .carousel-control-next, .carousel-control-prev {
-  position: absolute;
-  top: 40%;
-  width: 75px;
-  padding: 0;
-  background: var(--highlight-tx-color);
-  opacity: .5;
-  transition: opacity .15s ease;
-  height: 75px;
-  border-radius: 50%;
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('/media/login_page.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.index-carousel .carousel-control-prev
-{
-  left:9%;
-}
-.index-carousel .carousel-control-next
-{
-  right:9%;
-}
-.index-carousel .welcome-text {
-  position: absolute;
-  z-index: 1;
-  top: 25%;
-  right:10%;
-}
+.page-caption { padding-top: 170px; padding-bottom: 174px; }
+.page-title { font-size: 46px; line-height: 1; color: #fff; font-weight: 600; text-align: center; }
 
-.index-carousel .welcome-text h1
-{
-font-weight: 700;
-    font-size: 82px;
-    display: block;
-    margin-bottom: 0;
-    background: -webkit-linear-gradient(#ff9696, #ffe89e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent
-}
-.index-carousel .welcome-text p {
-  color: #ffffff;
-  margin-bottom: 50px;
-  display: block;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-}
-.index-carousel .carousel-img-overly{
-
-  outline: 500px solid rgba(0, 0, 0, 0.3) !important;
-  outline-offset: -500px;  
-}
-
+.card-section { position: relative; bottom: 60px; }
+.card-block { padding: 80px; }
+.section-title { margin-bottom: 60px; }
 /**** section header ****/
 .section-header:after {
   content: ""; 
@@ -241,17 +206,7 @@ font-weight: 700;
 
 /**** user testimonial ***/
 
-.items .card
-{
-  margin:1rem;
-}
-.items .card:hover .hover-text{
-  opacity:1;
-  animation: move-down .3s linear;
-  padding:1em;
-  width:100%;
-  text-align: center;
-}
+
 .fixed-top {
   position: fixed;
   z-index: 1030;
@@ -417,6 +372,7 @@ p {
 
 .profile-page .profile .name {
   margin-top: -80px;
+  
 }
 
 img.rounded {
