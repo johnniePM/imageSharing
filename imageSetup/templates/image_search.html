@@ -2,26 +2,53 @@
 {% block content %}
 
 <div style="height: 80px;"></div>
-{% for item in profile %}
-<img src="{{item.image.url}}" alt="image">
-hello
-{{item.user.username}}
-{{item.user.first_name}}
-{% endfor %}
+<div class="container">
+  <div class="row">
+    {% if profile %}
+    <div class="section-header text-center p-5">
+      <h2>Search Users</h2>
+  </div>
+    {% endif%}
+    {% for item in profile %}
+    
+      <div class="col-md-3">
+        <div class="card text-center h-100" style="width: 18rem;">
+          <img src="{{item.image.url}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">User</h5>
+            <p class="card-text">{{item.user.username}}
+            </p>
+            <a href="/user/{{item.user.username}}" class="btn btn-primary">Go Profle</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    
 
-
-
+<div class="row">
+  {% if image %}
+  <div class="section-header text-center p-5">
+    <h2>Search Images</h2>
+</div>
+  {% endif%}
+  
 {% for item in image %}
-<img src="{{item.file.url}}" alt=" image">
-{{item.title}}
-{{item.description}}
-{{item.created_at}}
-{{item.user}}
-<div></div>
-<div></div>
+<div class="col-md-3 text-center my-3">
+  <div class="card text-center  h-100" style="width: 18rem;">
+    <img src="{{item.file.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.title}}</h5>
+      <p class="card-text">{{item.user}}</p>
+      <p class="card-text">{{item.description}}</p>
+      <p class="card-text">{{item.created_at}}</p>
+      <a href="" class="btn btn-primary">Go Profle</a>
+    </div>
+  </div>
+</div>
 {% endfor %}
-
-
+</div>
+</div>
 
 
 {% endblock content %}
