@@ -122,10 +122,7 @@ class ImageMorePicsView(LoginRequiredMixin, ListView):
 
 
 class SearchResultsView(ListView):
-    
     template_name = 'image_search.html'
-
-
 
     def get_queryset(self): # new
         filter_field = self.request.GET.get('filter')
@@ -142,6 +139,8 @@ class SearchResultsView(ListView):
                 Q(user__username__icontains=query) | Q(user__first_name__icontains=query)
             )
             return object_list
+
+
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
         context = super(SearchResultsView, self).get_context_data(**kwargs)
@@ -160,4 +159,6 @@ class SearchResultsView(ListView):
             context['image'] = ImagesModel.objects.filter(
                     Q(title__icontains=query) | Q(description__icontains=query)
                 )
+
         return context
+

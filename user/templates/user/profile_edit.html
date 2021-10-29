@@ -4,12 +4,70 @@
 <div style="height: 100px;"></div>
 
 
-<form method="POST" enctype='multipart/form-data'>
-    {% csrf_token %}
-    
-    {{object.user}}
-    {{form.as_p}}
 
-     <input type="submit" value="Update" />
-</form>
-{% endblock content %}
+
+{% load static %}
+<div class="profile-page">
+
+    <div class="page-header header-filter" data-parallax="true">
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ms-auto mx-auto">
+                        <div class="profile">
+                            <div class="avatar pb-5">
+                                <img src=" {{object.image.url}}" alt="Circle Image"
+                                    class="img-raised rounded-circle img-fluid">
+                                <form method="POST" enctype='multipart/form-data' class="pb-4">
+                                    {% csrf_token %}
+                                    <p>
+                                        <input type="file" name="image" accept="image/*" id="id_image">
+                                    </p>
+                                    <input type="submit" value="Update" />
+                                </form>
+                            </div>
+
+                            <div class="name">
+                                <h3 class="title">{{object.user.username|title}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="description text-center col-4">
+                        <p>This user is {{object.user.first_name |title}} {{object.user.last_name |title}} <br>
+                            Email:{{object.user.email}} <br>Country: {{object.user.email}}</p>
+                    </div>
+                    <div class="p-4 text-black col-4" style="background-color: #f8f9fa;">
+                        <div class="d-flex justify-content-end text-center py-1">
+                            <div>
+                                <p class="mb-1 h5">{{page_obj.paginator.count}}</p>
+                                <p class="small text-muted mb-0">Photos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="lead fw-normal mb-0">Recent photos</p>
+                        <p class="mb-0"><a href="/images/viewmore/{{object.user.id}}/" class="text-muted">Show all</a>
+                        </p>
+                    </div>
+                    <div class="row g-2">
+                        {% include '_gallery.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+            integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+        </script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+            integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+        {% endblock content %}
