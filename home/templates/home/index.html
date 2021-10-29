@@ -1,8 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-  {% include "_carousel.html" %}
-  {% include "_gallery.html" %}
-  {% include "_viewmoreimages.html" %}
-  {% include "_user-testimonial.html" %}
+{% load static %}
+{% include "_carousel.html" %}
+<div class="profile-page">
 
+  <div class="page-header-carouser header-filter" data-parallax="true">
+  </div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        {% include "_the-section.html" %}
+        <div class="my-wrapper">
+          <div class="row justify-content-between mb-55">
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <h2 style="cursor: default;">Last nine images</h2>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <p style="cursor: default;">Be prepared to see one of the finest images ready to be saved into your
+                  list. <a style="cursor: pointer; color:#5e5e5e" href="{% url 'images:viewmore' %}">See all</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include "_gallery.html" %}
+        {% include "_viewmoreimages.html" %}
+        <div class="my-wrapper pt-5">
+          <div class="row justify-content-between mb-55">
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <h2 style="cursor: default;">Users</h2>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <p style="cursor: default;">A list of the users that already have registered in the website
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% include "_user-testimonial.html" %}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+{% comment %} <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> {% endcomment %}
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+  integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+  integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
 {% endblock content %}

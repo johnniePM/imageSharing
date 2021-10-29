@@ -10,10 +10,13 @@
     <p>Last edited at {{object.updated_at}} by {{object.user}} </p>
 
     {% if request.user.is_authenticated %}
+    {% if object.user.username == user.username%}
     <a href="{% url 'images:edit_image' object.id %}" class="btn btn-secondary m-4">Edit Post</a>
+
     <a href="{% url 'images:image_delete' object.id %}" class="btn btn-danger m-4">DELETE</a>
-    {%endif%}
-    <a href="{% url 'images:viewmore' %}" class="btn btn-danger m-4">Back</a>
+    {%endif%} {% endif %}
+
+    <a href="{% url 'images:viewmore' %}" class="btn btn-warning m-4">Back</a>
 </div>
 
 {% endblock content %}

@@ -12,7 +12,9 @@ from django.contrib.auth.models import User
 from imageSetup.models import ImagesModel
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.urls import reverse
 
+@login_required(login_url='accounts:login') #redirect when user is not logged in
 def profile_view(request,userName:str):
 
     try:
@@ -35,14 +37,11 @@ def profile_view(request,userName:str):
 
 class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     model=Profile
-    fields=['user','image']
+    fields=['image']
     template_name="user/profile_edit.html" 
-    success_url="/images/"   
+    slug_field = "user_id"
+    slug_url_kwarg = "user_id"
+    def get_success_url(self):
+        return reverse('user:profile', args=(self.object.user.username,))
 
 
-        
-
-
-
-
-    
