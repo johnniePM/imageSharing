@@ -1,6 +1,6 @@
 {% load static %}
 <header id="theMain">
-  <nav class="navbar  top-header fixed-top navbar-expand-lg">
+  <nav class="navbar  top-header fixed-top navbar-expand-lg" id="nav">
     <div class="container">
       <a class="navbar-brand text-white" href="{% url 'home:home' %}">Image
         Sharing</span>
@@ -14,10 +14,8 @@
           <li class="nav-item">
             {% if user.is_authenticated  %}
 
-            <a class="nav-link active" aria-current="page" href="#">{{user.username}}</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
+            <a class="nav-link active hiding" aria-current="page" href="/user/{{user}}">{{user.username}} </a> </li>
+          {% endif %} <li class="nav-item">
             <a class="nav-link" href="{% url 'images:viewmore' %}">Latest</a>
           </li>
           <li class="nav-item dropdown">
@@ -52,18 +50,303 @@
           {% endif %}
 
         </ul>
-        <form class="d-flex" method="get" action="{% url 'images:image_search' %}">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
-          <select name="filter" class="form-control" selected="selected">
+        <form class="d-flex input-group" method="get" action="{% url 'images:image_search' %}">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q">
+
+          <select name="filter" selected="selected" id="itemsList" style=" visibility: hidden;
+      width: 1px;">
             <option value="all">All</option>
-            <option value="user">user</option>
-            <option value="image">image</option>
+            <option value="user">Users</option>
+            <option value="image">Images</option>
           </select>
-          <button class="btn btn-outline-danger" type="submit">Search</button>
+          <div class="input-group-prepend">
+            <div class="dropdown">
+              <span class="selLabel">Select</span>
+              <input type="hidden" id="myList">
+              <ul class="dropdown-list">
+                <li data-value="all" value="all" id="myList1" onclick="selectAllItems1(this)">
+                  <span>All</span>
+                </li>
+                <li data-value="user" id="myList2" value="user" onclick="selectAllItems2(this)">
+                  <span>Users</span>
+                </li>
+                <li data-value="image" id="myList3" value="image" onclick="selectAllItems3(this)">
+                  <span>Images</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <button class="btn btn-outline-custom input-group-prepend hiding" id="mySearch" type="submit">Search</button>
         </form>
 
       </div>
     </div>
   </nav>
+  <script>
+    $(document).ready(function () {
 
+      $(".selLabel").click(function () {
+        $('.dropdown').toggleClass('active');
+      });
+
+      $(".dropdown-list li").click(function () {
+        $('.selLabel').text($(this).text());
+        $('.dropdown').removeClass('active');
+      });
+
+    });
+  </script>
+
+  <script>
+    var record = [];
+
+    var selectAllItems1 = function (target) {
+      var itemsList = document.getElementById('itemsList');
+      itemsList.options[0].selected = 1;
+      record[0] = itemsList.options[0].selected;
+      console.log(event.isTrusted ? 'Manually clicked' : 'Clicked programatically');
+      console.log('ClientX=', event.clientX)
+    }
+    var selectAllItems2 = function (target) {
+      var itemsList = document.getElementById('itemsList');
+      itemsList.options[1].selected = 1;
+      record[1] = itemsList.options[1].selected;
+      console.log(event.isTrusted ? 'Manually clicked' : 'Clicked programatically');
+      console.log('ClientX=', event.clientX)
+    }
+    var selectAllItems3 = function (target) {
+      var itemsList = document.getElementById('itemsList');
+      itemsList.options[2].selected = 1;
+      record[2] = itemsList.options[2].selected;
+      console.log(event.isTrusted ? 'Manually clicked' : 'Clicked programatically');
+      console.log('ClientX=', event.clientX)
+    }
+
+    var rebuildOptions = function () {
+      var itemsList = document.getElementById('itemsList');
+      for (var i = 0; i < record.length; i++) {
+        itemsList.options[i].selected = record[i];
+      }
+
+    }
+  </script>
+
+  <style>
+    /* Hiding the search button */
+    @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+    #hiding {
+      display: block;
+    }
+
+    @media (max-width: 1200px) and (min-width: 975px) {
+      .hiding {
+        display: none;
+      }
+    }
+
+    /* The custom btn*/
+    .btn-outline-custom {
+      color: #fff;
+      background-color: #34495e;
+      background-image: none;
+      border-color: #34495e
+    }
+
+    .btn-outline-custom:hover {
+      color: #fff;
+      background-color: #2a3a4b;
+      border-color: #485b6e
+    }
+
+    .btn-outline-custom:focus,
+    .btn-outline-custom.focus {
+      box-shadow: 0 0 0 .2rem rgba(119, 204, 204, 0.5)
+    }
+
+    .btn-outline-custom.disabled,
+    .btn-outline-custom:disabled {
+      color: #7cc;
+      background-color: transparent
+    }
+
+    .btn-outline-custom:not(:disabled):not(.disabled):active,
+    .btn-outline-custom:not(:disabled):not(.disabled).active,
+    .show>.btn-outline-custom.dropdown-toggle {
+      color: #34495e;
+      background-color: #485b6e;
+      border-color: #485b6e
+    }
+
+    .btn-outline-custom:not(:disabled):not(.disabled):active:focus,
+    .btn-outline-custom:not(:disabled):not(.disabled).active:focus,
+    .show>.btn-outline-custom.dropdown-toggle:focus {
+      box-shadow: 0 0 0 .2rem rgba(119, 204, 204, 0.5)
+    }
+
+    /* the search options */
+    .sel1: {
+      visibilty: hidden;
+      width: 1px;
+    }
+
+    .selected-item {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .selected-item p {
+      font-size: 18px;
+    }
+
+    .selected-item p span {
+      font-weight: bold;
+    }
+
+    /* dropdown list */
+    .dropdown {
+      width: 150px;
+      position: relative;
+      -webkit-perspective: 800px;
+      perspective: 800px;
+    }
+
+    .dropdown.active .selLabel:after {
+      content: '\25B2';
+    }
+
+    .dropdown.active .dropdown-list li:nth-child(1) {
+      -webkit-transform: translateY(100%);
+      transform: translateY(100%);
+    }
+
+    .dropdown.active .dropdown-list li:nth-child(2) {
+      -webkit-transform: translateY(200%);
+      transform: translateY(200%);
+    }
+
+    .dropdown.active .dropdown-list li:nth-child(3) {
+      -webkit-transform: translateY(300%);
+      transform: translateY(300%);
+    }
+
+    .dropdown>span {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 2px;
+      background: #34495e;
+      display: block;
+      padding: 0 50px 0 30px;
+      position: relative;
+      z-index: 9999;
+      cursor: pointer;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transform-origin: 50% 0%;
+      transform-origin: 50% 0%;
+      -webkit-transition: -webkit-transform 300ms;
+      transition: -webkit-transform 300ms;
+      transition: transform 300ms;
+      transition: transform 300ms, -webkit-transform 300ms;
+      -webkit-backface-visibility: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .dropdown>span:after {
+      content: '\25BC';
+      position: absolute;
+      right: 0px;
+      top: 15%;
+      width: 50px;
+      text-align: center;
+      font-size: 12px;
+      padding: 10px;
+      height: 70%;
+      line-height: 24px;
+      border-left: 1px solid #ddd;
+    }
+
+    .dropdown>span:active {
+      -webkit-transform: rotateX(45deg);
+      transform: rotateX(45deg);
+    }
+
+    .dropdown>span:active:after {
+      content: '\25B2';
+    }
+
+    .dropdown-list {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+    }
+
+    .dropdown-list li {
+      display: block;
+      list-style: none;
+      left: 0;
+      opacity: 1;
+      -webkit-transition: -webkit-transform 300ms ease;
+      transition: -webkit-transform 300ms ease;
+      transition: transform 300ms ease;
+      transition: transform 300ms ease, -webkit-transform 300ms ease;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .dropdown-list li:nth-child(1) {
+      background-color: #1abc9c;
+      z-index: 4;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+
+    .dropdown-list li:nth-child(2) {
+      background-color: #3498db;
+      z-index: 3;
+      -webkit-transform: translateY(3%);
+      transform: translateY(3%);
+    }
+
+    .dropdown-list li:nth-child(3) {
+      background-color: #9b59b6;
+      z-index: 2;
+      -webkit-transform: translateY(6%);
+      transform: translateY(6%);
+    }
+
+    .dropdown-list li:nth-child(4) {
+      background-color: #e67e22;
+      z-index: 1;
+      -webkit-transform: translateY(9%);
+      transform: translateY(9%);
+    }
+
+    .dropdown-list li span {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      -webkit-backface-visibility: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      width: 100%;
+      font-size: 18px;
+      line-height: 60px;
+      padding: 0 30px;
+      display: block;
+      color: #fff;
+      cursor: pointer;
+      letter-spacing: 2px;
+    }
+  </style>
 </header>

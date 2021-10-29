@@ -21,6 +21,6 @@ class RegisterView(View):
             user = authenticate(username=username, password=password)
             if user:
                 login(request,user)
-                return redirect("home:index")
+                return redirect("home:home")
 
         return  render(request,"accounts/register.html",{"form":form})

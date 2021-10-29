@@ -1,27 +1,260 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+{% include "_carousel.html" %}
 
-<div style="height: 80px;"></div>
-{% for item in profile %}
-<img src="{{item.image.url}}" alt="image">
-hello
-{{item.user.username}}
-{{item.user.first_name}}
-{% endfor %}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+  integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+
+<div class="profile-page">
+
+  <div class="page-header-carouser header-filter" data-parallax="true">
+  </div>
+  <div class="main main-raised min-vh-100">
+    <div class="profile-content">
+      <div class="container">
+        <div class="my-wrapper py-5">
+          <div class="row justify-content-between mb-55">
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <h2 style="cursor: default;">Search</h2>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-6">
+              <div class="section-tittle section-tittle3">
+                <p style="cursor: default;">Here are the search results of both users and images.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section id="tabs">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 ">
+                <nav>
+                  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                      aria-controls="nav-home" aria-selected="true">Users</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                      aria-controls="nav-profile" aria-selected="false">Images</a>
+
+                  </div>
+                </nav>
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    {% if profile%}
+
+                    <div class="row">
+                      <div class="col-lg-10 mx-auto">
+                        <div class="career-search mb-60">
+                          <div class="filter-result">
+                            {% for item in profile %}
+
+                            <div
+                              class="job-box d-md-flex align-items-center justify-content-between mb-30 image custom-image mt-4"
+                              onclick="window.location.href = '/user/{{item.user.username}}';">
+                              <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                                <div class="img-holder me-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                                  <img src="{{item.image.url}}" class="card-img-top rounded-circle" alt="...">
+
+                                </div>
+                                <div class="job-content">
+                                  <h5 class="text-center text-md-left">{{item.user.first_name}} {{item.user.last_name}}
+                                  </h5>
+                                  <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                    {% if item.country %}
+                                    <li class="me-md-4">
+                                      <i class="zmdi zmdi-pin me-2"></i> {{item.country}}
+                                    </li>
+                                    {% endif %}
+                                    <li class="me-md-4">
+                                      Username:{{item.user.username}}
+                                    </li>
+                                    <li class="me-md-4">
+                                      Email: {{item.user.email}}
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="job-right my-4 flex-shrink-0">
+                                <a href="/user/{{item.user.1}}"
+                                  class="btn d-block w-100 d-sm-inline-block btn-light">Profile</a>
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    {% if image%}
+                    {% include "_images_auto_load.html" %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+{% comment %} <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> {% endcomment %}
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+  integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+  integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
+<style>
+  .custom-image {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 25px 1px rgba(0, 0, 0, .3);
+    transition: .5s;
+  }
+
+  .custom-image:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 500px;
+    transform: translate(-200%, -100%);
+    background-color: blue;
+    opacity: 0.8;
+    border-radius: 40%;
+    transition: .8s
+  }
+
+  .custom-image:hover:after {
+    transform: translate(-50%, -50%)
+  }
 
 
+  .filter-result .job-box {
+    -webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+    box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+    border-radius: 10px;
+    padding: 10px 35px;
+  }
 
-{% for item in image %}
-<img src="{{item.file.url}}" alt=" image">
-{{item.title}}
-{{item.description}}
-{{item.created_at}}
-{{item.user}}
-<div></div>
-<div></div>
-{% endfor %}
+  ul {
+    list-style: none;
+  }
 
+  .list-disk li {
+    list-style: none;
+    margin-bottom: 12px;
+  }
 
+  .list-disk li:last-child {
+    margin-bottom: 0;
+  }
 
+  .job-box .img-holder {
+    height: 65px;
+    width: 65px;
+    background-color: #4e63d7;
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(78, 99, 215, 0.9)), to(#5a85dd));
+    background-image: linear-gradient(to right, rgba(78, 99, 215, 0.9) 0%, #5a85dd 100%);
+    font-family: "Open Sans", sans-serif;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 65px;
+  }
 
+  .career-title {
+    background-color: #4e63d7;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(78, 99, 215, 0.9)), to(#5a85dd));
+    background-image: linear-gradient(to right, rgba(78, 99, 215, 0.9) 0%, #5a85dd 100%);
+  }
+
+  .job-overview {
+    -webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+    box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+    border-radius: 10px;
+  }
+
+  @media (min-width: 992px) {
+    .job-overview {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 70px;
+    }
+  }
+
+  .job-overview .job-detail ul {
+    margin-bottom: 28px;
+  }
+
+  .job-overview .job-detail ul li {
+    opacity: 0.75;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .job-overview .job-detail ul li i {
+    font-size: 20px;
+    position: relative;
+    top: 1px;
+  }
+
+  .job-overview .overview-bottom,
+  .job-overview .overview-top {
+    padding: 35px;
+  }
+
+  .job-content ul li {
+    font-weight: 600;
+    opacity: 0.75;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 5px;
+  }
+
+  @media (min-width: 768px) {
+    .job-content ul li {
+      border-bottom: 0;
+      padding: 0;
+    }
+  }
+
+  .job-content ul li i {
+    font-size: 20px;
+    position: relative;
+    top: 1px;
+  }
+
+  .mb-30 {
+    margin-bottom: 30px;
+  }
+</style>
 {% endblock content %}
