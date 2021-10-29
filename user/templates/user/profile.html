@@ -24,7 +24,12 @@
           <div class="col-4"></div>
           <div class="description text-center col-4">
             <p>This user is {{usrProfile.first_name |title}} {{usrProfile.last_name |title}} <br>
-              Email:{{usrProfile.email}} <br>Country: {{usrProfile.email}}</p>
+              Email:{{usrProfile.email}} <br>Country: {{usrProfile.email}}
+              {% if usrProfile.username == user.username%}
+              <p style="cursor: pointer; text-decoration:underline; width: fit-content;"
+                onclick="window.location.href ='/user/edit_profile/{{usrProfile.id}}/';" class="mx-auto">Edit
+                profile</p>
+              {% endif %}</p>
           </div>
           <div class="p-4 text-black col-4" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
