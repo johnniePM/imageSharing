@@ -1,0 +1,69 @@
+{% load static %}
+<div class="my-wrapper">
+    <section class="services-area section-padding">
+        <div class="container">
+
+            <div class="row justify-content-between mb-55">
+                <div class="col-xl-5 col-lg-6 col-md-6">
+                    <div class="section-tittle section-tittle3">
+                        <h2 style="cursor: default;">Photo Atelier</h2>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6 col-md-6">
+                    <div class="section-tittle section-tittle3">
+                        <p style="cursor: default;">Keep your arms wide open and take a ride with us on the magic carpet
+                            in the land of art, our
+                            Photo Atelier!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat mb-50">
+                        <div class="cat-icon">
+                            <img src="assets/img/icon/services1.svg" alt="">
+                        </div>
+                        <div class="cat-cap">
+                            <h5>
+                                <div style="cursor: default;">Saved Images</div>
+                            </h5>
+                            <p style="cursor: default;">Go to the list of your favourites images that you chose to love
+                            </p>
+                            <a href="{% url 'images:image_saved_list' %}" class="browse-btn">Saved Images</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat mb-50">
+                        <div class="cat-icon">
+                            <img src="assets/img/icon/services2.svg" alt="">
+                        </div>
+                        <div class="cat-cap">
+                            <h5>
+                                <div href="#" style="cursor: default;">Browse</div>
+                            </h5>
+                            <p style="cursor: default;">Scroll down to explore a scent of the magic of Photo Atelier</p>
+                            <a href="#" class="browse-btn">Go to top</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat mb-50">
+                        <div class="cat-icon">
+                            <img src="assets/img/icon/services3.svg" alt="">
+                        </div>
+                        <div class="cat-cap">
+                            <h5>
+                                <div style="cursor: default;">Upload</div>
+                            </h5>
+                            <p style="cursor: default;">You can easily upload any image to be seen by milions.
+                            </p>
+                            <a href="{% url 'images:create' %}" class="browse-btn">Upload</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<link rel="stylesheet" href="{% static 'css/section.css' %}" />

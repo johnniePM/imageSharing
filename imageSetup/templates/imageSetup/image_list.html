@@ -1,4 +1,337 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
-{% include '_gallery.html' %}
-{% endblock content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/section.css' %}" />
+{% include "_carousel.html" %}
+
+<div class="profile-page">
+    <div class="page-header-carouser header-filter" data-parallax="true">
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div class="my-wrapper pt-5">
+                    <div class="row justify-content-between mb-55">
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="section-tittle section-tittle3">
+                                <h2 style="cursor: default;">Saved images</h2>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 col-md-6">
+                            <div class="section-tittle section-tittle3">
+                                <p style="cursor: default;">A list of all images Saved by the user
+                                    {{page_obj.user}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="infinite-container  container-fluid row">
+                    <div class="gallery infinite-item pb-5" id="gallery">
+                        {% if page_obj|length > 0%}
+                        <div class="gallery-container w-3 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.0.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.0.title}}</h3>
+                                    <h5>Description - {{page_obj.0.description}}</h5>
+                                    <h6>Created date - {{page_obj.0.created_at}}</h6>
+                                    <a href="{% url 'images:details' page_obj.0.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>´
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.0.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.0.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.0.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.0.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.0.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if page_obj|length > 1%}
+                        <div class="gallery-container w-3 h-3">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.1.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.1.title}}</h3>
+                                    <h5>Description - {{page_obj.1.description}}</h5>
+                                    <h6>Created date - {{page_obj.1.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.1.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.1.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.1.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.1.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.1.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.1.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 2%}
+                        <div class="gallery-container  h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.2.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.2.title}}</h3>
+                                    <h5>Description - {{page_obj.2.description}}</h5>
+                                    <h6>Created date - {{page_obj.2.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.2.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.2.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.2.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.2.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.2.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.2.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 3%}
+                        <div class="gallery-container w-2 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.3.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.3.title}}</h3>
+                                    <h5>Description - {{page_obj.3.description}}</h5>
+                                    <h6>Created date - {{page_obj.3.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.3.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.3.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.3.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.3.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.3.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.3.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 4%}
+                        <div class="gallery-container w-4 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.4.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.4.title}}</h3>
+                                    <h5>Description - {{page_obj.4.description}}</h5>
+                                    <h6>Created date - {{page_obj.4.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.4.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.4.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.4.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.4.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.4.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.4.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 5%}
+                        <div class="gallery-container w-3">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.5.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.5.title}}</h3>
+                                    <h5>Description - {{page_obj.5.description}}</h5>
+                                    <h6>Created date - {{page_obj.5.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.5.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.5.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.5.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.5.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.5.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.5.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 6%}
+                        <div class="gallery-container w-2 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.6.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.6.title}}</h3>
+                                    <h5>Description - {{page_obj.6.description}}</h5>
+                                    <h6>Created date - {{page_obj.6.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.6.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.6.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.6.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.6.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.6.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.6.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if page_obj|length > 7%}
+                        <div class="gallery-container w-2 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.7.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.7.title}}</h3>
+                                    <h5>Description - {{page_obj.7.description}}</h5>
+                                    <h6>Created date - {{page_obj.7.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.7.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.7.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.7.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.7.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.7.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.7.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if page_obj|length > 8%}
+                        <div class="gallery-container w-4 h-2">
+                            <div class="gallery-item">
+                                <div class="image">
+                                    <img src="{{page_obj.8.file.url}}" alt="nature">
+                                </div>
+                                <div class="hover-text">
+                                    <h3>Title - {{page_obj.8.title}}</h3>
+                                    <h5>Description - {{page_obj.8.description}}</h5>
+                                    <h6>Created date - {{page_obj.8.created_at}}</h6>
+
+                                    <a href="{% url 'images:details' page_obj.8.id %}"
+                                        style="pointer-events:initial !important;" class="btn btn-success">Details</a>
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user in page_obj.8.is_saved.all%}
+                                    <a href="{% url 'images:image_unsave' page_obj.8.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">unsave
+                                        {{page_obj.8.is_saved.all.count}}</a>
+                                    {% else %}
+                                    <a href="{% url 'images:image_save' page_obj.8.id %}" class="btn btn-warning"
+                                        style="pointer-events:initial !important;">save
+                                        {{page_obj.8.is_saved.all.count}}</a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                {% if page_obj.number < page_obj.paginator.num_pages %}
+                <a class="infinite-more-link" href="?page={{ page_obj.number|add:1 }}"> More</a>
+                {% endif %}
+
+                <div class="loading" style="display:none;">
+                    <h1> Loading.......</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+
+<script src="http://127.0.0.1:4000/static/js/jquery.waypoints.min.js"></script>
+<script src="http://127.0.0.1:4000/static/js/infinite.min.js"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
+
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+
+        offset: 'bottom-in-view',
+        onBeforePageLoad: function () {
+            $('.loading').show();
+        },
+        onAfterPageLoad: function () {
+            $('.loading').hide();
+        }
+    });
+</script>
+
+{% endblock  %}

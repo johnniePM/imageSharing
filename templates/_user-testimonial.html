@@ -1,22 +1,87 @@
  <div class="container-fluid mb-5 pb-2">
-        <div class="section-header text-center p-5">
-            <h2>Users</h2>
-        </div>
+     <div>
+         <div class="items">
+             {% for user in user_list %}
+             <a class="" href="/user/{{user.1}}">
+                 <div class="image custom-image mb-4 "> <img class="img-cus" src="/media/{{user.5}}"
+                         alt="Profile pictire">
+                     <h5 class="cus-text">{{user.1}} </br>
+                         {{user.2}} {{user.3}}
+                     </h5>
 
-        <div class="items ">
-            {% for user in user_list %}
-                <a href="/user/{{user.1}}">
-                <div class="card">
-                    <img src="/media/{{user.5}}" alt="image" class="card-img-top img-fluid" style="
-    height: 150px;">
-                        <div class="card-body">
-                            <h4>{{user.1}}</h4>
-                        </div>
-                        <div class="hover-text">{{user.2}} {{user.3}}</div>
-                </div></a>             
-            {% endfor %}              
-            </div>
-</div>
+                 </div>
+             </a>
+             {% endfor %}
+         </div>
+     </div>
+ </div>
+ <style>
+     .containerm {
+         overflow: hidden;
+         width: 100%;
+         padding: 2rem;
+         display: flex;
+         justify-content: center;
+         align-items: center
+     }
 
+     .custom-image {
+         overflow: hidden;
+         height: 17vw;
+         width: 17vw;
+         position: relative;
+         cursor: pointer;
+         margin: 0 15px;
+         box-shadow: 0 0 25px 1px rgba(0, 0, 0, .3);
+         transition: .5s;
+         background-color: #555
+     }
 
-   
+     .custom-image:after {
+         content: '';
+         position: absolute;
+         z-index: 1;
+         top: 50%;
+         left: 50%;
+         width: 500px;
+         height: 500px;
+         transform: translate(-140%, -50%);
+         background-color: blue;
+         opacity: 0.8;
+         border-radius: 50%;
+         transition: .8s
+     }
+
+     .custom-image:hover:after {
+         transform: translate(-50%, -50%)
+     }
+
+     .custom-image:hover img {
+         transform: translate(-50%, -50%) scale(1.3) rotate(20deg)
+     }
+
+     .img-cus {
+         position: absolute;
+         height: 110%;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         transition: .8s
+     }
+
+     .cus-text {
+         position: absolute;
+         z-index: 2;
+         top: 50%;
+         left: 50%;
+         transform: translate(-2000px, -50%);
+         color: #fff;
+         transition: .8s;
+         transition-timing-function: ease-in
+     }
+
+     .custom-image:hover .cus-text {
+         transform: translate(-50%, -50%);
+         transition-timing-function: ease
+     }
+ </style>

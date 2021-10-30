@@ -1,12 +1,10 @@
 {% load static %}
 
-<div class="container ">
-  <div class="section-header text-center p-5">
-    <h2>Gallery</h2>
-  </div>
+<div class="container mt-5 ">
+
 
   <div class="gallery">
-    {% if request.user.is_authenticated %}
+    {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
 
 
 
@@ -14,14 +12,15 @@
     <div class="gallery-container w-3 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.0.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.0.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.0.title}}</h3>
           <h5>Description - {{page_obj.0.description}}</h5>
           <h6>Created date - {{page_obj.0.created_at}}</h6>
           <a href="{% url 'images:details' page_obj.0.id %}" style="pointer-events:initial !important;"
-            class="btn btn-success">Details</a>
+            class="btn btn-success">Details</a>´
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.0.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.0.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -30,6 +29,7 @@
           <a href="{% url 'images:image_save' page_obj.0.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">save
             {{page_obj.0.is_saved.all.count}}</a>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -40,7 +40,7 @@
     <div class="gallery-container w-3 h-3">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.1.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.1.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.1.title}}</h3>
@@ -49,9 +49,9 @@
           <!-- {% if page_obj.1.user.username == user.username %}
           <a href="{% url 'images:details' page_obj.1.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>  {% endif %} -->
-            <a href="{% url 'images:details' page_obj.1.id %}" style="pointer-events:initial !important;"
+          <a href="{% url 'images:details' page_obj.1.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
-        
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.1.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.1.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -61,7 +61,7 @@
             style="pointer-events:initial !important;">save
             {{page_obj.1.is_saved.all.count}}</a>
           {% endif %}
-
+          {% endif %}
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="gallery-container  h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.2.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.2.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.2.title}}</h3>
@@ -84,6 +84,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.2.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.2.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.2.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -93,7 +94,7 @@
             style="pointer-events:initial !important;">save
             {{page_obj.2.is_saved.all.count}}</a>
           {% endif %}
-
+          {% endif %}
         </div>
       </div>
     </div>
@@ -104,7 +105,7 @@
     <div class="gallery-container w-2 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.3.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.3.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.3.title}}</h3>
@@ -116,6 +117,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.3.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.3.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.3.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -124,6 +126,7 @@
           <a href="{% url 'images:image_save' page_obj.3.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">save
             {{page_obj.3.is_saved.all.count}}</a>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -135,7 +138,7 @@
     <div class="gallery-container w-4 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.4.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.4.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.4.title}}</h3>
@@ -147,6 +150,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.4.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.4.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.4.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -155,6 +159,7 @@
           <a href="{% url 'images:image_save' page_obj.4.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">save
             {{page_obj.4.is_saved.all.count}}</a>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -166,7 +171,7 @@
     <div class="gallery-container w-3">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.5.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.5.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.5.title}}</h3>
@@ -178,6 +183,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.5.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.5.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.5.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -186,6 +192,7 @@
           <a href="{% url 'images:image_save' page_obj.5.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">save
             {{page_obj.5.is_saved.all.count}}</a>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -197,7 +204,7 @@
     <div class="gallery-container w-2 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.6.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.6.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.6.title}}</h3>
@@ -209,6 +216,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.6.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.6.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.6.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -217,6 +225,7 @@
           <a href="{% url 'images:image_save' page_obj.6.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">save
             {{page_obj.6.is_saved.all.count}}</a>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -228,7 +237,7 @@
     <div class="gallery-container w-2 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.7.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.7.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.7.title}}</h3>
@@ -240,6 +249,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.7.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.7.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.7.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -249,6 +259,7 @@
             style="pointer-events:initial !important;">save
             {{page_obj.7.is_saved.all.count}}</a>
           {% endif %}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -257,7 +268,7 @@
     <div class="gallery-container w-4 h-2">
       <div class="gallery-item">
         <div class="image">
-          <img src="{{page_obj.8.file.url}}" alt="nature">
+          <img class="img-thumbnail" src="{{page_obj.8.file.url}}" alt="nature">
         </div>
         <div class="hover-text">
           <h3>Title - {{page_obj.8.title}}</h3>
@@ -269,6 +280,7 @@
           {% endif %} -->
           <a href="{% url 'images:details' page_obj.8.id %}" style="pointer-events:initial !important;"
             class="btn btn-success">Details</a>
+          {% if request.user.is_authenticated %}
           {% if request.user in page_obj.8.is_saved.all%}
           <a href="{% url 'images:image_unsave' page_obj.8.id %}" class="btn btn-warning"
             style="pointer-events:initial !important;">unsave
@@ -278,10 +290,11 @@
             style="pointer-events:initial !important;">save
             {{page_obj.8.is_saved.all.count}}</a>
           {% endif %}
+          {% endif %}
         </div>
       </div>
     </div>
     {% endif %}
-    {% endif %}
+    {% comment %} {% endif %} {% endcomment %}
   </div>
 </div>
