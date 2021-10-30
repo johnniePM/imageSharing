@@ -48,9 +48,10 @@
               {% if request.user.is_authenticated %}
               {% if object.user.username == user.username%}
               <button onclick="location.href='{% url 'images:create' %}'"
-                class="ctrl-standard typ-subhed fx-bubbleDown  col-6">upload image</button>
+                class="btn btn-outline-custom input-group-prepend hiding col-6 me-1">upload image</button>
               <button onclick="location.href='{% url 'images:image_saved_list' %}'"
-                class="ctrl-standard typ-subhed fx-bubbleUp  col-6">Saved images</button>
+                class="btn btn-outline-custom input-group-prepend hiding  col-6">Saved images</button>
+
               {%endif%} {% endif %}
             </div>
           </div>
