@@ -3,8 +3,7 @@
 
 {% load static %}
 <div id="myImg">
-    <img src=" https://icoconvert.com/images/noimage2.png" alt="" id="blah" class="page-header-carouser masthead1"
-        data-parallax="true">
+    <img src="/media/login_page.jpg" alt="" id="blah" class="page-header-carouser masthead1" data-parallax="true">
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -18,8 +17,18 @@
     </div>
     <div class="main main-raised">
         <div class="profile-content">
-            <div class="container">
+            <p style="cursor: default;" class="float-end mt-1 me-1 text-black-50"> <small> <em> Will be created at
+                        {% now "jS F Y H:i" %}
+                        by
+                        {{user.username}}</em></small>
+            </p>
+
+            <div class="container pt-4">
                 <div>
+                    <div class="mx-auto col-3 row ">
+                        <h2 style="cursor: default;" class="mx-auto text-center">Upload a picture</h2>
+                        <p style="cursor: default;" class="mx-auto text-center ">Upload your picture here!
+                    </div>
                     <form method='post' enctype="multipart/form-data">
                         {% csrf_token %}
 
@@ -33,9 +42,6 @@
                                 </div>
                                 <div class="col-xl-5 col-lg-6 col-md-6">
                                     <div class="section-tittle section-tittle3">
-                                        <p style="cursor: default;">Will be created at {% now "jS F Y H:i" %} by
-                                            {{user.username}}
-                                        </p>
                                     </div>
                                 </div>
                             </div>
