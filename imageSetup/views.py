@@ -41,20 +41,16 @@ class ImageCreateFormView(LoginRequiredMixin,FormView):
             # return redirect("images:list", pk=pk)
             return redirect("images:list")
 
-
-
 @login_required(login_url='accounts:login') #redirect when user is not logged in
 def images_list_view_user(request,pk:int):
     resuertUser=User.objects.get(id=pk)
+    userProfile=Profile.objects.get(user_id=resuertUser.id)
     queryset = ImagesModel.objects.filter(user=resuertUser)
-    object_list=queryset.order_by('-created_at')
+    object_list=queryset.order_by('-updated_at')
     paginator = Paginator(object_list, 9) # Show 9 pics per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request,'imageSetup/image_list.html', {'page_obj': page_obj})
-
-
-
+    return render(request,'imageSetup/image_list.html', {'page_obj': page_obj,"object":userProfile,"usrProfile":resuertUser,})
 
 
 class ImageListView(LoginRequiredMixin, ListView):
