@@ -1,39 +1,346 @@
 {% extends 'base.html' %}
 {% block content %}
-<img id="uploaded_image" src="https://icoconvert.com/images/noimage2.png" alt="your image" />
 
-<form class="pt-3" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="card">
-        <div class="card-title shadow-sm p-3 border-danger">
-            <label for="id_title">Title:</label>
-            <input type="text" name="title" maxlength="100" required="" id="id_title" class="border-0">
+{% load static %}
+<div id="myImg">
+    <img src=" https://icoconvert.com/images/noimage2.png" alt="" id="blah" class="page-header-carouser masthead1"
+        data-parallax="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            </div>
         </div>
-        <div class="card-body shadow-sm p-3 border-danger m-auto col-11">
-            <label for="id_description">Description:</label>
-            <textarea name="description" cols="40" rows="10" required="" id="id_description">
-                </textarea>
-        </div>
-        <div>
-            <label for="id_file">File:</label>
-            <input type="file" name="file" required="" id="id_file" onchange="readURL(this)">
-        </div>
-        <button type="submit" class="btn btn-primary">create</button>
     </div>
-</form>
+</div>
+<div class="profile-page">
 
+    <div class="page-header-carouser header-filter" data-parallax="true">
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div>
+                    <form method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="my-wrapper pt-5">
+                            <div class="row justify-content-between mb-55">
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <div class="section-tittle section-tittle3">
+                                        <h2 style="cursor: default;"><input type="text" class="border-0" name="title"
+                                                placeholder="Title" maxlength="100" required="" id="id_title"></h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <div class="section-tittle section-tittle3">
+                                        <p style="cursor: default;">Will be created at {% now "jS F Y H:i" %} by
+                                            {{user.username}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section id="block_content">
+                            <div class="col-md-6 container">
+                                <blockquote class="blockstyle"> <span class="triangle"></span><textarea
+                                        name="description" class=" border-0 txta w-100" required="" id=" id_description"
+                                        placeholder="Describe the image..."></textarea>
+                                    </p>
+                                </blockquote>
+                            </div>
+                        </section>
+                        <div class="container row-xGrid-yMiddle">
+                            <div class="row-xGrid iso-standard pb-2 mx-auto d-grid gap-2 col-6 mx-auto">
+
+                                <button type="submit" class="ctrl-standard typ-subhed fx-bubbleDown btn-lg"> Save
+                                    Changes
+                                </button>
+                                <input type="file" class="form-control" name="file" accept="image/*" id="id_file"
+                                    style="display:none;" onchange="readURL(this)">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="container row-xGrid-yMiddle">
+                        <div class="row-xGrid iso-standard pb-5 mx-auto d-grid gap-2 col-6 mx-auto">
+                            <button onClick="javascript:history.go(-1);"
+                                class="ctrl-standard typ-subhed fx-bubbleUp btn-lg">Discard</button>
+                            <button onclick="openfileDialog();"
+                                class="ctrl-standard typ-subhed fx-sliderIn btn-lg">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+{% comment %} <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endcomment %}
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
+<script>
+    function openfileDialog() {
+        $("#id_file").click();
+    }
+</script>
 <script>
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#uploaded_image')
-                    .attr('src', e.target.result)
+                $('#myImg').css("background-image", "url('https://sebhastian.com/img/default.png')");
 
             };
+            console.log("Hello world!");
+
             reader.readAsDataURL(input.files[0]);
         }
     }
+    id_file.onchange = evt => {
+        const [file] = id_file.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
 </script>
+<style>
+    .masthead1 {
+        height: 100vh;
+        min-height: 500px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: -webkit-fill-available;
+    }
+
+    blockquote {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        padding: 20px 20px 20px 40px;
+        border-left: none;
+        position: relative;
+        text-indent: -19px
+    }
+
+    section#block_content {
+        min-height: 400px;
+        padding-top: 40px;
+        text-align: left
+    }
+
+    blockquote p {
+        font-size: 1em
+    }
+
+    blockquote:before {
+        font-family: Arial, serif;
+        font-size: 2.5em;
+        vertical-align: top;
+        line-height: 0
+    }
+
+    blockquote:after {
+        font-family: Arial, serif;
+        font-size: 2.5em;
+        vertical-align: bottom;
+        line-height: 0;
+        display: flex;
+        text-align: center;
+        justify-content: flex-end;
+        margin-top: 13px;
+    }
+
+    blockquote:before {
+        content: open-quote;
+        margin-right: 4px
+    }
+
+    blockquote:after {
+        content: close-quote;
+        margin-left: 3px
+    }
+
+    blockquote.blockstyle,
+    blockquote.style2 {
+        background: #fff;
+        font-style: italic
+    }
+
+    blockquote.blockstyle p,
+    blockquote.style2 p {
+        display: inline
+    }
+
+    blockquote.blockstyle:before,
+    blockquote.blockstyle:after {
+        color: #f0715f
+    }
+
+
+
+
+    /* alternate colors */
+    /* corner values for bubble up and down */
+
+
+    .typ-subhed {
+        font-family: 'Oswald', sans-serif;
+        font-size: 18px;
+        line-height: 20px;
+        letter-spacing: 0;
+    }
+
+    /* lets create a container and put it in the middle */
+
+
+
+
+    .ctrl-standard.fx-bubbleDown {
+        color: #f0b81f;
+        border-color: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown::after {
+        bottom: auto;
+        border-radius: 0 0 $right-val2 $left-val2/0 0 $right-val1 $left-val1;
+        background: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed::after {
+        height: 300%;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed:hover {
+        color: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed:hover::after {
+        height: 0;
+    }
+
+    .ctrl-standard.fx-bubbleUp {
+        color: #9fa255;
+        border-color: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp::after {
+        top: auto;
+        border-radius: $right-val1 $left-val1 0 0/$right-val2 $left-al2 0 0;
+        background: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed::after {
+        height: 300%;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed:hover {
+        color: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed:hover::after {
+        height: 0;
+    }
+
+    .ctrl-standard.fx-sliderIn {
+        color: #81aaa4;
+        border-color: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn::after {
+        background: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed::after {
+        width: 300%;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed:hover {
+        color: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed:hover::after {
+        width: 0;
+    }
+
+    [class*="ctrl-"] {
+        padding: 5ox 10px;
+        border-radius: 2px;
+        border: 1px solid #231f20;
+    }
+
+    [class*="ctrl-"][class*="fx-"]:hover,
+    [class*="ctrl-"][class*="fx-"].active {
+        color: #231f20;
+    }
+
+    [class*="ctrl-"][class*="fx-"].is-reversed {
+        color: #231f20;
+    }
+
+    [class*="fx-"],
+    [class*="fx-"]:hover {
+        transition: color 0.5s ease-in-out;
+    }
+
+    [class*="fx-"]:not(.fx-dyna) {
+        position: relative;
+        z-index: 1;
+        transition-delay: 0.2s !important;
+        overflow: hidden;
+    }
+
+    [class*="fx-"]:not(.fx-dyna)::after,
+    [class*="fx-"]:not(.fx-dyna)::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+    }
+
+    [class*="fx-bubble"]::after {
+        transition: height 0.5s ease-in-out;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 0;
+        width: 100%;
+    }
+
+    [class*="fx-bubble"]:hover::after,
+    [class*="fx-bubble"].active::after {
+        transition: height 0.5s ease-in-out;
+        height: 300%;
+    }
+
+    [class*="fx-bubble"]:disabled:hover::after {
+        height: 0;
+    }
+
+    .fx-sliderIn::after {
+        transition: width 0.5s ease-in-out;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+    }
+
+    .fx-sliderIn:hover::after,
+    .fx-sliderIn.active::after {
+        transition: width 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    :checked+.fx-sliderIn::after,
+    .fx-sliderIn.active::after {
+        width: 300%;
+    }
+</style>
+
 
 {% endblock content %}

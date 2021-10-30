@@ -61,10 +61,11 @@ class ImageListView(LoginRequiredMixin, ListView):
     model=ImagesModel
     template_name="imageSetup/image_list.html"
     paginate_by=9
-    ordering = ['-created_at']
     def get_queryset(self):
         user= self.request.user
-        page_obj=ImagesModel.objects.filter(user=user)
+        order=ImagesModel.objects.filter(user=user)
+        page_obj=order.order_by('-created_at')
+
         return page_obj
 
 class ImagesEditFormView(LoginRequiredMixin,UserFilterViewMixin,UpdateView):

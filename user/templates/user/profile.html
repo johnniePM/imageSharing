@@ -24,7 +24,7 @@
           <div class="col-4"></div>
           <div class="description text-center col-4">
             <p>This user is {{usrProfile.first_name |title}} {{usrProfile.last_name |title}} <br>
-              Email:{{usrProfile.email}} <br>Country: {{usrProfile.email}}
+              Email:{{usrProfile.email}} <br>Country: {{object.country}}
               {% if usrProfile.username == user.username%}
               <p style="cursor: pointer; text-decoration:underline; width: fit-content;"
                 onclick="window.location.href ='/user/edit_profile/{{usrProfile.id}}/';" class="mx-auto">Edit
@@ -43,6 +43,17 @@
             <p class="lead fw-normal mb-0">Recent photos</p>
             <p class="mb-0"><a href="/images/viewmore/{{usrProfile.id}}/" class="text-muted">Show all</a></p>
           </div>
+          <div class="container  ">
+            <div class=" iso-standard pb-5 d-flex justify-content-between align-items-center mb-4 col-4 mx-auto">
+              {% if request.user.is_authenticated %}
+              {% if object.user.username == user.username%}
+              <button onclick="location.href='{% url 'images:create' %}'"
+                class="ctrl-standard typ-subhed fx-bubbleDown  col-6">upload image</button>
+              <button onclick="location.href='{% url 'images:image_saved_list' %}'"
+                class="ctrl-standard typ-subhed fx-bubbleUp  col-6">Saved images</button>
+              {%endif%} {% endif %}
+            </div>
+          </div>
           <div class="row g-2">
             {% include '_gallery.html' %}
           </div>
@@ -59,5 +70,5 @@
       integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="{% static 'js/profile.js' %}"></script>
-
+    <link rel="stylesheet" href="{% static 'css/btn_style.css' %}">
     {% endblock content  %}

@@ -37,7 +37,7 @@ def profile_view(request,userName:str):
 
 class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     model=Profile
-    fields=['image']
+    fields=['image','country']
     template_name="user/profile_edit.html" 
     slug_field = "user_id"
     slug_url_kwarg = "user_id"

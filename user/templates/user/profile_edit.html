@@ -21,8 +21,8 @@
                                         <input type="file" name="image" accept="image/*" id="id_image"
                                             onchange="readURL(this)">
                                     </p>
-                                    <input type="submit" value="Update" />
-                                </form>
+                                    <input type="submit" value="Update" class="btn btn-secondary" />
+
                             </div>
 
                             <div class="name">
@@ -34,9 +34,14 @@
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="description text-center col-4">
-                        <p>This user is {{object.user.first_name |title}} {{object.user.last_name |title}} <br>
-                            Email:{{object.user.email}} <br>Country: {{object.country}} </p>
+                        <p style="cursor: default;">This user is {{object.user.first_name |title}}
+                            {{object.user.last_name |title}} <br>
+                            Email:{{object.user.email}} <br>Country: <input type="text" class="border-0 text-black-50"
+                                name=" country" value="{{object.country}}" maxlength="15" style="width: 70px;"
+                                required="" id="id_country">
+                        </p>
                     </div>
+                    </form>
                     <div class="p-4 text-black col-4" style="background-color: #f8f9fa;">
                         <div class="d-flex justify-content-end text-center py-1">
                             <div>

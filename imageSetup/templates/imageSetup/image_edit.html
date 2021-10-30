@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% csrf_token %}
 {% load static %}
-<div class="page-header-carouser masthead1 " data-parallax="true">
+<div id="myImg">
+    <img src="{{object.file.url}}" alt="" id="blah" class="page-header-carouser " data-parallax="true">
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -20,6 +20,8 @@
             <div class="container">
                 <div>
                     <form method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+
                         <div class="my-wrapper pt-5">
                             <div class="row justify-content-between mb-55">
                                 <div class="col-xl-5 col-lg-6 col-md-6">
@@ -54,7 +56,7 @@
                                     Changes
                                 </button>
                                 <input type="file" class="form-control" name="file" accept="image/*" id="id_file"
-                                    style="display:none;">
+                                    style="display:none;" onchange="readURL(this)">
 
                                 <button onclick="location.href='{% url 'images:image_delete' object.id %}'"
                                     class="ctrl-standard typ-subhed fx-bubbleUp btn-lg">Delete</button>
@@ -86,11 +88,30 @@
         $("#id_file").click();
     }
 </script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#myImg').css("background-image", "url('https://sebhastian.com/img/default.png')");
+
+            };
+            console.log("Hello world!");
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    id_file.onchange = evt => {
+        const [file] = id_file.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+</script>
 <style>
     .masthead1 {
         height: 100vh;
         min-height: 500px;
-        background-image: url('{{object.file.url}}');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
