@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import fields
+from user.models import Profile
 
 class SignupForm(UserCreationForm):
     first_name= forms.CharField(max_length=150, help_text="Requiered. 150 characters of fewer", label="First Name")
@@ -25,3 +26,5 @@ class SignupForm(UserCreationForm):
         if existing_user.exists():
             raise forms.ValidationError("A user with this username already exist")
         return username
+    
+

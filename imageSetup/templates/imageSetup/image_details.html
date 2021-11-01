@@ -1,22 +1,296 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
-<div>
-    <img src="{{ object.file.url}}" class="mx-auto  w-100" alt="note image">
-    <h1 class="pb-5">{{object.title}}</h1>
-    <p>{{object.description}}</p>
-    <p>uploaded at {{object.created_at}} by {{object.user}} </p>
-    <p>Last edited at {{object.updated_at}} by {{object.user}} </p>
-
-    {% if request.user.is_authenticated %}
-    {% if object.user.username == user.username%}
-    <a href="{% url 'images:edit_image' object.id %}" class="btn btn-secondary m-4">Edit Post</a>
-
-    <a href="{% url 'images:image_delete' object.id %}" class="btn btn-danger m-4">DELETE</a>
-    {%endif%} {% endif %}
-
-    <a href="{% url 'images:viewmore' %}" class="btn btn-warning m-4">Back</a>
+{% load static %}
+<div class="page-header-carouser masthead1 " data-parallax="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            </div>
+        </div>
+    </div>
 </div>
+<div class="profile-page">
 
+    <div class="page-header-carouser header-filter" data-parallax="true">
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div>
+                    <div class="my-wrapper pt-5">
+                        <div class="row justify-content-between mb-55">
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="section-tittle section-tittle3">
+                                    <h2 style="cursor: default;">{{object.title}}</h2>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-6 col-md-6">
+                                <div class="section-tittle section-tittle3">
+                                    <p style="cursor: default;">uploaded at {{object.created_at}} by {{object.user}}
+                                    </p>
+                                    <p style="cursor: default;">Last edited at {{object.updated_at}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="block_content">
+                        <div class="col-md-6 container">
+                            <blockquote class="blockstyle"> <span class="triangle"></span>{{object.description}}
+                            </blockquote>
+                        </div>
+                    </section>
+                    <div class="container row-xGrid-yMiddle">
+                        <div class="row-xGrid iso-standard pb-5 mx-auto d-grid gap-2 col-6 mx-auto">
+                            {% if request.user.is_authenticated %}
+                            {% if object.user.username == user.username%}
+                            <button onclick="location.href='{% url 'images:edit_image' object.id %}'"
+                                class="ctrl-standard typ-subhed fx-bubbleDown btn-lg">Edit Image</button>
+                            {% else %}
+                            <button class="ctrl-standard typ-subhed fx-bubbleDown btn-lg" disabled
+                                data-bs-toggle="button">Edit Image</button>
+                            {%endif%} {% endif %}
+                            <button onclick="location.href='{% url 'images:image_delete' object.id %}'"
+                                class="ctrl-standard typ-subhed fx-bubbleUp btn-lg">Delete</button>
+                            <button onclick="location.href='{% url 'images:viewmore' %}'"
+                                class="ctrl-standard typ-subhed fx-sliderIn btn-lg">Go Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+{% comment %} <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> {% endcomment %}
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
+<style>
+    .masthead1 {
+        height: 100vh;
+        min-height: 500px;
+        background-image: url('{{object.file.url}}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    blockquote {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        padding: 20px 20px 20px 40px;
+        border-left: none;
+        position: relative;
+        text-indent: -19px
+    }
+
+    section#block_content {
+        min-height: 400px;
+        padding-top: 40px;
+        text-align: left
+    }
+
+    blockquote p {
+        font-size: 1em
+    }
+
+    blockquote:before,
+    blockquote:after {
+        font-family: Arial, serif;
+        font-size: 2.5em;
+        vertical-align: middle;
+        line-height: 0
+    }
+
+    blockquote:before {
+        content: open-quote;
+        margin-right: 4px
+    }
+
+    blockquote:after {
+        content: close-quote;
+        margin-left: 3px
+    }
+
+    blockquote.blockstyle,
+    blockquote.style2 {
+        background: #fff;
+        font-style: italic
+    }
+
+    blockquote.blockstyle p,
+    blockquote.style2 p {
+        display: inline
+    }
+
+    blockquote.blockstyle:before,
+    blockquote.blockstyle:after {
+        color: #f0715f
+    }
+
+
+
+
+    /* alternate colors */
+    /* corner values for bubble up and down */
+
+
+    .typ-subhed {
+        font-family: 'Oswald', sans-serif;
+        font-size: 18px;
+        line-height: 20px;
+        letter-spacing: 0;
+    }
+
+    /* lets create a container and put it in the middle */
+
+
+
+
+    .ctrl-standard.fx-bubbleDown {
+        color: #f0b81f;
+        border-color: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown::after {
+        bottom: auto;
+        border-radius: 0 0 $right-val2 $left-val2/0 0 $right-val1 $left-val1;
+        background: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed::after {
+        height: 300%;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed:hover {
+        color: #f0b81f;
+    }
+
+    .ctrl-standard.fx-bubbleDown.is-reversed:hover::after {
+        height: 0;
+    }
+
+    .ctrl-standard.fx-bubbleUp {
+        color: #9fa255;
+        border-color: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp::after {
+        top: auto;
+        border-radius: $right-val1 $left-val1 0 0/$right-val2 $left-al2 0 0;
+        background: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed::after {
+        height: 300%;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed:hover {
+        color: #9fa255;
+    }
+
+    .ctrl-standard.fx-bubbleUp.is-reversed:hover::after {
+        height: 0;
+    }
+
+    .ctrl-standard.fx-sliderIn {
+        color: #81aaa4;
+        border-color: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn::after {
+        background: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed::after {
+        width: 300%;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed:hover {
+        color: #81aaa4;
+    }
+
+    .ctrl-standard.fx-sliderIn.is-reversed:hover::after {
+        width: 0;
+    }
+
+    [class*="ctrl-"] {
+        padding: 5ox 10px;
+        border-radius: 2px;
+        border: 1px solid #231f20;
+    }
+
+    [class*="ctrl-"][class*="fx-"]:hover,
+    [class*="ctrl-"][class*="fx-"].active {
+        color: #231f20;
+    }
+
+    [class*="ctrl-"][class*="fx-"].is-reversed {
+        color: #231f20;
+    }
+
+    [class*="fx-"],
+    [class*="fx-"]:hover {
+        transition: color 0.5s ease-in-out;
+    }
+
+    [class*="fx-"]:not(.fx-dyna) {
+        position: relative;
+        z-index: 1;
+        transition-delay: 0.2s !important;
+        overflow: hidden;
+    }
+
+    [class*="fx-"]:not(.fx-dyna)::after,
+    [class*="fx-"]:not(.fx-dyna)::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+    }
+
+    [class*="fx-bubble"]::after {
+        transition: height 0.5s ease-in-out;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 0;
+        width: 100%;
+    }
+
+    [class*="fx-bubble"]:hover::after,
+    [class*="fx-bubble"].active::after {
+        transition: height 0.5s ease-in-out;
+        height: 300%;
+    }
+
+    [class*="fx-bubble"]:disabled:hover::after {
+        height: 0;
+    }
+
+    .fx-sliderIn::after {
+        transition: width 0.5s ease-in-out;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+    }
+
+    .fx-sliderIn:hover::after,
+    .fx-sliderIn.active::after {
+        transition: width 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    :checked+.fx-sliderIn::after,
+    .fx-sliderIn.active::after {
+        width: 300%;
+    }
+</style>
 {% endblock content %}
