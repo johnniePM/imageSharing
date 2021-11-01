@@ -13,6 +13,8 @@ from imageSetup.models import ImagesModel
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.urls import reverse
+from django.views.generic.list import ListView
+
 
 @login_required(login_url='accounts:login') #redirect when user is not logged in
 def profile_view(request,userName:str):
@@ -43,5 +45,17 @@ class ProfileEditFormView(LoginRequiredMixin,UpdateView):
     slug_url_kwarg = "user_id"
     def get_success_url(self):
         return reverse('user:profile', args=(self.object.user.username,))
+
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model=Profile
+    template_name="user/user_list.html"
+    paginate_by=9
+    def get_queryset(self):
+        page_obj=Profile.objects.order_by('user')
+        return page_obj
+
+
 
 
